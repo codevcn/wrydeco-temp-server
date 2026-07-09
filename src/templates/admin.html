@@ -116,10 +116,12 @@
             <td>{{ e.phone }}</td>
             <td class="msg-cell">{{ e.message }}</td>
             <td>
-              {% if e.stored_file_name %}
-                <a class="file-link" href="/uploads/{{ e.stored_file_name }}" target="_blank" rel="noopener">
-                  {{ e.file_name or e.stored_file_name }}
-                </a>
+              {% if e.files %}
+                {% for f in e.files %}
+                  <a class="file-link" href="/uploads/{{ f.stored_file_name }}" target="_blank" rel="noopener">
+                    {{ f.file_name or f.stored_file_name }}
+                  </a>{% if not loop.last %}<br />{% endif %}
+                {% endfor %}
               {% else %}
                 <span class="muted">&mdash;</span>
               {% endif %}

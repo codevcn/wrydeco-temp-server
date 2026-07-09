@@ -1,8 +1,16 @@
 """Database engine, session factory and ORM models."""
 from datetime import datetime, timezone
 
-from sqlalchemy import Column, DateTime, Integer, String, Text, create_engine
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy import (
+    Column,
+    DateTime,
+    ForeignKey,
+    Integer,
+    String,
+    Text,
+    create_engine,
+)
+from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 
 from .config import DATABASE_URL
 
@@ -25,13 +33,33 @@ class ConsultationEntry(Base):
     phone = Column(String(64), nullable=False)
     message = Column(Text, nullable=False)  # "Yêu cầu ngắn gọn"
 
-    # Original filename and the stored (on-disk) filename, if a file was sent.
-    file_name = Column(String(512), nullable=True)
-    stored_file_name = Column(String(512), nullable=True)
-
     created_at = Column(
         DateTime, default=lambda: datetime.now(timezone.utc), nullable=False
     )
+
+    # One entry can have many uploaded files.
+    files = relationship(
+        "ConsultationFile",
+        back_populates="entry",
+        cascade="all, delete-orphan",
+    )
+
+
+class ConsultationFile(Base):
+    """A single file/image attached to a consultation entry."""
+
+    __tablename__ = "consultation_files"
+
+    id = Column(Integer, primary_key=True, index=True)
+    entry_id = Column(
+        Integer, ForeignKey("consultation_entries.id"), nullable=False, index=True
+    )
+
+    # Original filename and the stored (on-disk) filename.
+    file_name = Column(String(512), nullable=False)
+    stored_file_name = Column(String(512), nullable=False)
+
+    entry = relationship("ConsultationEntry", back_populates="files")
 
 
 def init_db() -> None:

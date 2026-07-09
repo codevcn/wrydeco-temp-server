@@ -11,7 +11,7 @@ from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 
 from .config import TEMPLATES_DIR, UPLOAD_DIR
-from .database import ConsultationEntry, get_db, init_db
+from .database import ConsultationEntry, ConsultationFile, get_db, init_db
 
 app = FastAPI(title="Wrydeco Shopify Consultation Server")
 
@@ -52,30 +52,36 @@ async def create_consultation(
     email: str = Form(...),
     phone: str = Form(...),
     message: str = Form(...),
-    file: UploadFile | None = File(None),
+    files: list[UploadFile] = File(default=[]),
     db: Session = Depends(get_db),
 ) -> JSONResponse:
-    """Receive a FormData submission from the browser and store it."""
-    stored_file_name: str | None = None
-    original_file_name: str | None = None
+    """Receive a FormData submission from the browser and store it.
 
-    # Persist the optional uploaded image/file to disk with a unique name.
-    if file is not None and file.filename:
-        original_file_name = file.filename
-        suffix = Path(file.filename).suffix
-        stored_file_name = f"{uuid.uuid4().hex}{suffix}"
-        dest = UPLOAD_DIR / stored_file_name
-        content = await file.read()
-        dest.write_bytes(content)
-
+    The `files` field is optional and may contain multiple images/files.
+    """
     entry = ConsultationEntry(
         name=name,
         email=email,
         phone=phone,
         message=message,
-        file_name=original_file_name,
-        stored_file_name=stored_file_name,
     )
+
+    # Persist each uploaded file to disk with a unique name and link it.
+    for upload in files:
+        if not upload.filename:
+            continue  # skip empty file parts
+        suffix = Path(upload.filename).suffix
+        stored_file_name = f"{uuid.uuid4().hex}{suffix}"
+        dest = UPLOAD_DIR / stored_file_name
+        content = await upload.read()
+        dest.write_bytes(content)
+        entry.files.append(
+            ConsultationFile(
+                file_name=upload.filename,
+                stored_file_name=stored_file_name,
+            )
+        )
+
     db.add(entry)
     db.commit()
     db.refresh(entry)
@@ -85,6 +91,7 @@ async def create_consultation(
         content={
             "success": True,
             "id": entry.id,
+            "file_count": len(entry.files),
             "message": "Consultation entry saved.",
         },
     )
