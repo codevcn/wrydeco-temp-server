@@ -12,7 +12,7 @@ from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
-
+from starlette.datastructures import UploadFile as StarletteUploadFile
 from .config import TEMPLATES_DIR, UPLOAD_DIR
 from .database import ConsultationEntry, ConsultationFile, get_db, init_db
 
@@ -80,17 +80,32 @@ def _content_disposition(disposition: str, filename: str) -> str:
 
 @app.post("/api/consultations")
 async def create_consultation(
-    name: str = Form(...),
-    email: str = Form(...),
-    phone: str = Form(...),
-    message: str = Form(...),
-    # Field chuẩn: files
-    files: list[UploadFile] | None = File(default=None),
-    # Field dự phòng: file
-    # Dùng để tránh lỗi nếu frontend cũ đang gửi name="file"
-    legacy_files: list[UploadFile] | None = File(default=None, alias="file"),
+    request: Request,
     db: Session = Depends(get_db),
 ) -> JSONResponse:
+    form = await request.form()
+
+    name = str(form.get("name") or "").strip()
+    email = str(form.get("email") or "").strip()
+    phone = str(form.get("phone") or "").strip()
+    message = str(form.get("message") or "").strip()
+
+    missing_fields = []
+    if not name:
+        missing_fields.append("name")
+    if not email:
+        missing_fields.append("email")
+    if not phone:
+        missing_fields.append("phone")
+    if not message:
+        missing_fields.append("message")
+
+    if missing_fields:
+        raise HTTPException(
+            status_code=422,
+            detail=f"Missing required fields: {', '.join(missing_fields)}",
+        )
+
     entry = ConsultationEntry(
         name=name,
         email=email,
@@ -98,16 +113,13 @@ async def create_consultation(
         message=message,
     )
 
-    upload_items: list[UploadFile] = []
-    if files:
-        upload_items.extend(files)
-    if legacy_files:
-        upload_items.extend(legacy_files)
+    upload_items = []
+
+    for key, value in form.multi_items():
+        if isinstance(value, StarletteUploadFile) and value.filename:
+            upload_items.append(value)
 
     for upload in upload_items:
-        if not upload.filename:
-            continue
-
         suffix = Path(upload.filename).suffix.lower()
         stored_file_name = f"{uuid.uuid4().hex}{suffix}"
         dest = UPLOAD_DIR / stored_file_name
