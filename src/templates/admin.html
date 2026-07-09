@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Manager Page</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --text: #1a202c;
+      --muted: #718096;
+      --accent: #2b6cb0;
+      --head: #2d3748;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    header {
+      background: var(--head);
+      color: #fff;
+      padding: 20px 28px;
+    }
+    header h1 { margin: 0; font-size: 22px; }
+    header p { margin: 4px 0 0; color: #cbd5e0; font-size: 13px; }
+    main { padding: 24px 28px; }
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .count-badge {
+      background: var(--accent);
+      color: #fff;
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 13px;
+    }
+    .table-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow-x: auto;
+      box-shadow: 0 1px 3px rgba(0,0,0,.06);
+    }
+    table { width: 100%; border-collapse: collapse; min-width: 900px; }
+    thead th {
+      background: #edf2f7;
+      text-align: left;
+      padding: 12px 14px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    tbody td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      vertical-align: top;
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: #f7fafc; }
+    .msg-cell { max-width: 320px; white-space: pre-wrap; }
+    a.file-link { color: var(--accent); text-decoration: none; }
+    a.file-link:hover { text-decoration: underline; }
+    .empty {
+      padding: 40px;
+      text-align: center;
+      color: var(--muted);
+    }
+    .muted { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Admin Manager Page</h1>
+    <p>Consultation Entries &mdash; Wrydeco Shopify Store</p>
+  </header>
+
+  <main>
+    <div class="toolbar">
+      <span class="count-badge">{{ entries|length }} entr{{ 'y' if entries|length == 1 else 'ies' }}</span>
+    </div>
+
+    <div class="table-wrap">
+      {% if entries %}
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Tên</th>
+            <th>Email</th>
+            <th>Điện thoại</th>
+            <th>Yêu cầu ngắn gọn</th>
+            <th>Tệp đính kèm</th>
+            <th>Thời gian</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for e in entries %}
+          <tr>
+            <td>{{ e.id }}</td>
+            <td>{{ e.name }}</td>
+            <td>{{ e.email }}</td>
+            <td>{{ e.phone }}</td>
+            <td class="msg-cell">{{ e.message }}</td>
+            <td>
+              {% if e.stored_file_name %}
+                <a class="file-link" href="/uploads/{{ e.stored_file_name }}" target="_blank" rel="noopener">
+                  {{ e.file_name or e.stored_file_name }}
+                </a>
+              {% else %}
+                <span class="muted">&mdash;</span>
+              {% endif %}
+            </td>
+            <td class="muted">{{ e.created_at.strftime('%Y-%m-%d %H:%M:%S') }} UTC</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <div class="empty">Chưa có consultation entry nào được lưu.</div>
+      {% endif %}
+    </div>
+  </main>
+</body>
+</html>
