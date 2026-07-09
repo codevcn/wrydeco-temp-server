@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from fastapi import Depends, FastAPI, File, Form, Request, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -13,6 +14,15 @@ from .config import TEMPLATES_DIR, UPLOAD_DIR
 from .database import ConsultationEntry, get_db, init_db
 
 app = FastAPI(title="Wrydeco Shopify Consultation Server")
+
+# Cho phép MỌI origin gửi request đến (public API).
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],      # mọi domain
+    allow_credentials=False,  # phải False khi allow_origins = "*"
+    allow_methods=["*"],      # mọi HTTP method
+    allow_headers=["*"],      # mọi header
+)
 
 templates = Jinja2Templates(directory=str(TEMPLATES_DIR))
 
