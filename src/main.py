@@ -1,11 +1,14 @@
 """FastAPI server for storing Shopify store Consultation Entries."""
+
+import mimetypes
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import quote
 
-from fastapi import Depends, FastAPI, File, Form, Request, UploadFile
+from fastapi import Depends, FastAPI, File, Form, HTTPException, Request, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
@@ -15,18 +18,17 @@ from .database import ConsultationEntry, ConsultationFile, get_db, init_db
 
 app = FastAPI(title="Wrydeco Shopify Consultation Server")
 
-# Cho phép MỌI origin gửi request đến (public API).
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],      # mọi domain
-    allow_credentials=False,  # phải False khi allow_origins = "*"
-    allow_methods=["*"],      # mọi HTTP method
-    allow_headers=["*"],      # mọi header
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 templates = Jinja2Templates(directory=str(TEMPLATES_DIR))
 
-# Serve uploaded files so the admin table can link/preview them.
+# Vẫn giữ static route để có thể truy cập trực tiếp file nếu cần.
 app.mount("/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
 
 
@@ -37,7 +39,6 @@ def on_startup() -> None:
 
 @app.get("/api/health")
 def healthcheck() -> JSONResponse:
-    """Healthcheck endpoint."""
     return JSONResponse(
         {
             "message": "Shopify Server responses Hello!!!",
@@ -46,19 +47,50 @@ def healthcheck() -> JSONResponse:
     )
 
 
+def _safe_uploaded_path(stored_file_name: str) -> Path:
+    """
+    Trả về đường dẫn file upload an toàn.
+    Chặn path traversal kiểu ../../etc/passwd.
+    """
+    upload_root = UPLOAD_DIR.resolve()
+    file_path = (UPLOAD_DIR / stored_file_name).resolve()
+
+    try:
+        file_path.relative_to(upload_root)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid file path.")
+
+    if not file_path.exists() or not file_path.is_file():
+        raise HTTPException(status_code=404, detail="File not found.")
+
+    return file_path
+
+
+def _content_disposition(disposition: str, filename: str) -> str:
+    """
+    Tạo Content-Disposition an toàn, hỗ trợ tên file tiếng Việt.
+    """
+    safe_ascii = filename.encode("ascii", "ignore").decode().replace('"', "")
+    if not safe_ascii:
+        safe_ascii = "file"
+
+    encoded = quote(filename)
+    return f"{disposition}; filename=\"{safe_ascii}\"; filename*=UTF-8''{encoded}"
+
+
 @app.post("/api/consultations")
 async def create_consultation(
     name: str = Form(...),
     email: str = Form(...),
     phone: str = Form(...),
     message: str = Form(...),
-    files: list[UploadFile] = File(default=[]),
+    # Field chuẩn: files
+    files: list[UploadFile] | None = File(default=None),
+    # Field dự phòng: file
+    # Dùng để tránh lỗi nếu frontend cũ đang gửi name="file"
+    legacy_files: list[UploadFile] | None = File(default=None, alias="file"),
     db: Session = Depends(get_db),
 ) -> JSONResponse:
-    """Receive a FormData submission from the browser and store it.
-
-    The `files` field is optional and may contain multiple images/files.
-    """
     entry = ConsultationEntry(
         name=name,
         email=email,
@@ -66,15 +98,23 @@ async def create_consultation(
         message=message,
     )
 
-    # Persist each uploaded file to disk with a unique name and link it.
-    for upload in files:
+    upload_items: list[UploadFile] = []
+    if files:
+        upload_items.extend(files)
+    if legacy_files:
+        upload_items.extend(legacy_files)
+
+    for upload in upload_items:
         if not upload.filename:
-            continue  # skip empty file parts
-        suffix = Path(upload.filename).suffix
+            continue
+
+        suffix = Path(upload.filename).suffix.lower()
         stored_file_name = f"{uuid.uuid4().hex}{suffix}"
         dest = UPLOAD_DIR / stored_file_name
+
         content = await upload.read()
         dest.write_bytes(content)
+
         entry.files.append(
             ConsultationFile(
                 file_name=upload.filename,
@@ -99,12 +139,75 @@ async def create_consultation(
 
 @app.get("/admin", response_class=HTMLResponse)
 def admin_page(request: Request, db: Session = Depends(get_db)) -> HTMLResponse:
-    """Render the Admin Manager Page listing all stored entries."""
     entries = (
-        db.query(ConsultationEntry)
-        .order_by(ConsultationEntry.created_at.desc())
-        .all()
+        db.query(ConsultationEntry).order_by(ConsultationEntry.created_at.desc()).all()
     )
+
     return templates.TemplateResponse(
-        "admin.html", {"request": request, "entries": entries}
+        "admin.html",
+        {
+            "request": request,
+            "entries": entries,
+        },
+    )
+
+
+@app.get("/admin/files/{file_id}/view")
+def view_uploaded_file(file_id: int, db: Session = Depends(get_db)) -> FileResponse:
+    """
+    Mở file trong tab mới.
+    Ảnh/video/pdf sẽ được browser preview nếu hỗ trợ.
+    """
+    file_record = (
+        db.query(ConsultationFile).filter(ConsultationFile.id == file_id).first()
+    )
+
+    if not file_record:
+        raise HTTPException(status_code=404, detail="File record not found.")
+
+    file_path = _safe_uploaded_path(file_record.stored_file_name)
+
+    media_type, _ = mimetypes.guess_type(str(file_path))
+    if not media_type:
+        media_type = "application/octet-stream"
+
+    return FileResponse(
+        path=file_path,
+        media_type=media_type,
+        headers={
+            "Content-Disposition": _content_disposition(
+                "inline",
+                file_record.file_name or file_record.stored_file_name,
+            )
+        },
+    )
+
+
+@app.get("/admin/files/{file_id}/download")
+def download_uploaded_file(file_id: int, db: Session = Depends(get_db)) -> FileResponse:
+    """
+    Tải file về máy với tên gốc.
+    """
+    file_record = (
+        db.query(ConsultationFile).filter(ConsultationFile.id == file_id).first()
+    )
+
+    if not file_record:
+        raise HTTPException(status_code=404, detail="File record not found.")
+
+    file_path = _safe_uploaded_path(file_record.stored_file_name)
+
+    media_type, _ = mimetypes.guess_type(str(file_path))
+    if not media_type:
+        media_type = "application/octet-stream"
+
+    return FileResponse(
+        path=file_path,
+        media_type=media_type,
+        headers={
+            "Content-Disposition": _content_disposition(
+                "attachment",
+                file_record.file_name or file_record.stored_file_name,
+            )
+        },
     )
