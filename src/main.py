@@ -31,10 +31,22 @@ templates = Jinja2Templates(directory=str(TEMPLATES_DIR))
 # Vẫn giữ static route để có thể truy cập trực tiếp file nếu cần.
 app.mount("/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
 
+ALLOWED_IMAGE_CONTENT_TYPES = {
+    "image/jpeg": ".jpg",
+    "image/png": ".png",
+    "image/webp": ".webp",
+    "image/gif": ".gif",
+}
+
+MAX_IMAGE_UPLOAD_BYTES = 10 * 1024 * 1024  # 10MB mỗi ảnh
+
+IMAGE_UPLOAD_DIR = UPLOAD_DIR / "images"
+
 
 @app.on_event("startup")
 def on_startup() -> None:
     init_db()
+    IMAGE_UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 
 @app.get("/api/health")
@@ -221,5 +233,57 @@ def download_uploaded_file(file_id: int, db: Session = Depends(get_db)) -> FileR
                 "attachment",
                 file_record.file_name or file_record.stored_file_name,
             )
+        },
+    )
+
+
+@app.post("/api/upload-image")
+async def upload_image(
+    request: Request,
+    image: UploadFile = File(...),
+) -> JSONResponse:
+    """
+    Upload 1 file ảnh, lưu vào server và trả về URL public để xem ảnh.
+    Field name khi gửi FormData phải là: image
+    """
+
+    if not image.filename:
+        raise HTTPException(status_code=400, detail="Image file is required.")
+
+    content_type = image.content_type or ""
+
+    if content_type not in ALLOWED_IMAGE_CONTENT_TYPES:
+        raise HTTPException(
+            status_code=400,
+            detail="Only jpg, png, webp, and gif images are allowed.",
+        )
+
+    content = await image.read()
+
+    if len(content) > MAX_IMAGE_UPLOAD_BYTES:
+        raise HTTPException(
+            status_code=413,
+            detail="Image exceeds 10MB limit.",
+        )
+
+    IMAGE_UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+
+    extension = ALLOWED_IMAGE_CONTENT_TYPES[content_type]
+    stored_file_name = f"{uuid.uuid4().hex}{extension}"
+    dest = IMAGE_UPLOAD_DIR / stored_file_name
+
+    dest.write_bytes(content)
+
+    # Build absolute public URL.
+    # Dùng X-Forwarded-Proto để khi chạy sau Nginx HTTPS vẫn trả https://
+    scheme = request.headers.get("x-forwarded-proto", request.url.scheme)
+    host = request.headers.get("host", request.url.netloc)
+
+    image_url = f"{scheme}://{host}/uploads/images/{stored_file_name}"
+
+    return JSONResponse(
+        status_code=201,
+        content={
+            "image_url": image_url,
         },
     )
