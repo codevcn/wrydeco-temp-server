@@ -1,0 +1,16 @@
+[Unit]
+Description=Wrydeco Shopify Consultation FastAPI Server
+After=network.target
+
+[Service]
+Type=simple
+# Sửa User và đường dẫn cho đúng với VPS của bạn
+User=www-data
+WorkingDirectory=/var/www/wrydeco-temp-server
+# Dùng uvicorn trong virtualenv, chạy production (không reload), 2 worker
+ExecStart=/var/www/wrydeco-temp-server/.venv/bin/uvicorn src.main:app --host 127.0.0.1 --port 8000 --workers 2
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
