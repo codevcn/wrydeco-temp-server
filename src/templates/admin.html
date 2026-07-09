@@ -183,6 +183,24 @@
       .muted {
         color: var(--muted);
       }
+
+      .toolbar-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 12px;
+        border-radius: 999px;
+        font-size: 13px;
+        text-decoration: none;
+        color: #fff;
+        background: var(--accent);
+        border: 1px solid var(--accent);
+        white-space: nowrap;
+      }
+
+      .toolbar-btn:hover {
+        text-decoration: underline;
+      }
     </style>
   </head>
 
@@ -197,6 +215,10 @@
         <span class="count-badge">
           {{ entries|length }} entr{{ 'y' if entries|length == 1 else 'ies' }}
         </span>
+
+        <a class="toolbar-btn" href="/view-uploads">
+          Xem tất cả file đã tải lên
+        </a>
       </div>
 
       <div class="table-wrap">
