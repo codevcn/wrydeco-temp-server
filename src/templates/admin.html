@@ -228,9 +228,10 @@
             <tr>
               <th>ID</th>
               <th>Tên</th>
-              <th>Email</th>
-              <th>Điện thoại</th>
+              <th>Liên hệ</th>
               <th>Yêu cầu ngắn gọn</th>
+              <th>Lịch tư vấn</th>
+              <th>Trạng thái</th>
               <th>Tệp đính kèm</th>
               <th>Thời gian</th>
             </tr>
@@ -241,9 +242,28 @@
             <tr>
               <td>{{ e.id }}</td>
               <td>{{ e.name }}</td>
-              <td>{{ e.email }}</td>
-              <td>{{ e.phone }}</td>
+              <td>
+                {{ e.contact_value_raw }}
+                <div class="muted" style="font-size: 12px; margin-top: 2px">
+                  {{ e.contact_type }}
+                </div>
+              </td>
               <td class="msg-cell">{{ e.message }}</td>
+
+              <td>
+                {% if e.consultation_time_raw %}
+                {{ e.consultation_time_raw }}
+                {% else %}
+                <span class="muted">&mdash;</span>
+                {% endif %}
+              </td>
+
+              <td>
+                <div>{{ e.lead_status }}</div>
+                <div class="muted" style="font-size: 12px; margin-top: 2px">
+                  {{ e.schedule_status }}
+                </div>
+              </td>
 
               <td class="files-cell">
                 {% if e.files and e.files|length > 0 %}

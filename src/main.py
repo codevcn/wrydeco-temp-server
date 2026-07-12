@@ -1,9 +1,12 @@
 """FastAPI server for storing Shopify store Consultation Entries."""
 
+import hashlib
 import mimetypes
+import re
 import uuid
-from datetime import datetime, timezone
+from datetime import date, datetime, time, timezone
 from pathlib import Path
+from typing import Optional
 from urllib.parse import quote
 
 from fastapi import (
@@ -50,6 +53,28 @@ ALLOWED_IMAGE_CONTENT_TYPES = {
 MAX_IMAGE_UPLOAD_BYTES = 10 * 1024 * 1024  # 10MB mỗi ảnh
 
 IMAGE_UPLOAD_DIR = UPLOAD_DIR / "images"
+
+# --- Consultation form contract (doc/consultation-form.md) ---------------
+
+# Attachment: chỉ chấp nhận MIME đã xác minh bằng magic bytes.
+CONSULTATION_ALLOWED_TYPES = {
+    "image/jpeg": ".jpg",
+    "image/png": ".png",
+    "application/pdf": ".pdf",
+}
+MAX_ATTACHMENT_BYTES = 10 * 1024 * 1024  # 10MB mỗi file
+MAX_ATTACHMENTS_PER_REQUEST = 10
+MAX_TOTAL_ATTACHMENT_BYTES = 30 * 1024 * 1024  # 30MB mỗi request
+
+NAME_MIN_LEN, NAME_MAX_LEN = 2, 255
+CONTACT_MAX_LEN = 320
+MESSAGE_MIN_LEN, MESSAGE_MAX_LEN = 10, 10_000
+
+_EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
+_PHONE_ALLOWED_RE = re.compile(r"^\+?[\d\s().\-]+$")
+_SCHEDULE_RE = re.compile(
+    r"^(\d{2}):(\d{2})\s+(AM|PM),\s+(\d{2})/(\d{2})/(\d{4})$"
+)
 
 
 @app.on_event("startup")
@@ -128,73 +153,305 @@ def _content_disposition(disposition: str, filename: str) -> str:
     return f"{disposition}; filename=\"{safe_ascii}\"; filename*=UTF-8''{encoded}"
 
 
+class _FieldError(Exception):
+    """Một lỗi validation gắn với một field, để gom vào response 422."""
+
+    def __init__(self, field: str, code: str, message: str) -> None:
+        super().__init__(message)
+        self.field = field
+        self.code = code
+        self.message = message
+
+
+def _classify_contact(raw: str):
+    """
+    Phân loại ``phone_or_email`` thành email hoặc phone và normalize.
+    Trả về (contact_type, normalized) hoặc (None, None) nếu không hợp lệ.
+    """
+    if _EMAIL_RE.match(raw):
+        local, _, domain = raw.rpartition("@")
+        return "email", f"{local}@{domain.lower()}"
+
+    # Không phải email → thử parse như số điện thoại.
+    if _PHONE_ALLOWED_RE.match(raw):
+        digits = re.sub(r"\D", "", raw)
+        if len(digits) >= 7:
+            prefix = "+" if raw.lstrip().startswith("+") else ""
+            return "phone", f"{prefix}{digits}"
+
+    return None, None
+
+
+def _parse_consultation_time(raw: str):
+    """
+    Parse ``hh:mm AM|PM, dd/mm/yyyy`` → (date, time).
+    Raise _FieldError nếu format/giá trị không hợp lệ hoặc ngày đã qua.
+    """
+    match = _SCHEDULE_RE.match(raw)
+    if not match:
+        raise _FieldError(
+            "consultation_time",
+            "INVALID_SCHEDULE",
+            "Use the format hh:mm AM|PM, dd/mm/yyyy.",
+        )
+
+    hh, mm, period, dd, mo, yyyy = match.groups()
+    hour, minute = int(hh), int(mm)
+
+    if not 1 <= hour <= 12:
+        raise _FieldError(
+            "consultation_time", "INVALID_SCHEDULE", "Hour must be 01-12."
+        )
+    if minute % 5 != 0:
+        raise _FieldError(
+            "consultation_time",
+            "INVALID_SCHEDULE",
+            "Minutes must be in 5-minute steps.",
+        )
+
+    # 12h → 24h.
+    if period == "AM":
+        hour24 = 0 if hour == 12 else hour
+    else:
+        hour24 = 12 if hour == 12 else hour + 12
+
+    try:
+        preferred_date = date(int(yyyy), int(mo), int(dd))
+    except ValueError:
+        raise _FieldError(
+            "consultation_time", "INVALID_SCHEDULE", "That date does not exist."
+        )
+
+    if preferred_date < datetime.now(timezone.utc).date():
+        raise _FieldError(
+            "consultation_time",
+            "PAST_SCHEDULE",
+            "The preferred date is in the past.",
+        )
+
+    return preferred_date, time(hour24, minute)
+
+
+def _sniff_attachment_mime(content: bytes) -> Optional[str]:
+    """Xác minh MIME bằng magic bytes; None nếu không thuộc loại cho phép."""
+    if content[:3] == b"\xff\xd8\xff":
+        return "image/jpeg"
+    if content[:8] == b"\x89PNG\r\n\x1a\n":
+        return "image/png"
+    if content[:5] == b"%PDF-":
+        return "application/pdf"
+    return None
+
+
+def _sanitize_original_name(filename: str) -> str:
+    """Chỉ giữ basename để lưu hiển thị; không dùng làm path lưu trữ."""
+    return Path(filename).name or "file"
+
+
+def _field(field: str, code: str, message: str) -> dict:
+    return {"field": field, "code": code, "message": message}
+
+
+def _error_response(status_code: int, code: str, message: str, errors=None):
+    body = {"success": False, "code": code, "message": message}
+    if errors is not None:
+        body["errors"] = errors
+    return JSONResponse(status_code=status_code, content=body)
+
+
 @app.post("/api/consultations")
 async def create_consultation(
     request: Request,
     db: Session = Depends(get_db),
 ) -> JSONResponse:
-    form = await request.form()
-
-    name = str(form.get("name") or "").strip()
-    email = str(form.get("email") or "").strip()
-    phone = str(form.get("phone") or "").strip()
-    message = str(form.get("message") or "").strip()
-
-    missing_fields = []
-    if not name:
-        missing_fields.append("name")
-    if not email:
-        missing_fields.append("email")
-    if not phone:
-        missing_fields.append("phone")
-    if not message:
-        missing_fields.append("message")
-
-    if missing_fields:
-        raise HTTPException(
-            status_code=422,
-            detail=f"Missing required fields: {', '.join(missing_fields)}",
+    try:
+        form = await request.form()
+    except Exception:
+        return _error_response(
+            400, "MALFORMED_REQUEST", "The multipart request is malformed."
         )
 
-    entry = ConsultationEntry(
-        name=name,
-        email=email,
-        phone=phone,
-        message=message,
-    )
+    # --- 1. Business fields: name, phone_or_email, message ---------------
+    errors = []
 
-    upload_items = []
-
-    for key, value in form.multi_items():
-        if isinstance(value, StarletteUploadFile) and value.filename:
-            upload_items.append(value)
-
-    for upload in upload_items:
-        suffix = Path(upload.filename).suffix.lower()
-        stored_file_name = f"{uuid.uuid4().hex}{suffix}"
-        dest = UPLOAD_DIR / stored_file_name
-
-        content = await upload.read()
-        dest.write_bytes(content)
-
-        entry.files.append(
-            ConsultationFile(
-                file_name=upload.filename,
-                stored_file_name=stored_file_name,
+    name = str(form.get("name") or "").strip()
+    if not name:
+        errors.append(_field("name", "REQUIRED", "Name is required."))
+    elif not NAME_MIN_LEN <= len(name) <= NAME_MAX_LEN:
+        errors.append(
+            _field(
+                "name",
+                "INVALID_LENGTH",
+                f"Name must be {NAME_MIN_LEN}-{NAME_MAX_LEN} characters.",
             )
         )
 
-    db.add(entry)
-    db.commit()
-    db.refresh(entry)
+    # phone_or_email là contract mới; fallback email/phone cho giai đoạn migrate.
+    contact_raw = str(form.get("phone_or_email") or "").strip()
+    if not contact_raw:
+        contact_raw = (
+            str(form.get("email") or "").strip()
+            or str(form.get("phone") or "").strip()
+        )
+
+    contact_type = None
+    contact_normalized = None
+    if not contact_raw:
+        errors.append(
+            _field(
+                "phone_or_email",
+                "REQUIRED",
+                "A phone number or email address is required.",
+            )
+        )
+    elif len(contact_raw) > CONTACT_MAX_LEN:
+        errors.append(
+            _field(
+                "phone_or_email",
+                "INVALID_LENGTH",
+                f"Contact must be at most {CONTACT_MAX_LEN} characters.",
+            )
+        )
+    else:
+        contact_type, contact_normalized = _classify_contact(contact_raw)
+        if contact_type is None:
+            errors.append(
+                _field(
+                    "phone_or_email",
+                    "INVALID_CONTACT",
+                    "Enter a valid phone number or email address.",
+                )
+            )
+
+    message = str(form.get("message") or "").strip()
+    if not message:
+        errors.append(_field("message", "REQUIRED", "A short request is required."))
+    elif not MESSAGE_MIN_LEN <= len(message) <= MESSAGE_MAX_LEN:
+        errors.append(
+            _field(
+                "message",
+                "INVALID_LENGTH",
+                f"Message must be {MESSAGE_MIN_LEN}-{MESSAGE_MAX_LEN} characters.",
+            )
+        )
+
+    # --- 2. Optional scheduler -------------------------------------------
+    consultation_time_raw = str(form.get("consultation_time") or "").strip()
+    preferred_date = None
+    preferred_time = None
+    schedule_status = "not_requested"
+    if consultation_time_raw:
+        try:
+            preferred_date, preferred_time = _parse_consultation_time(
+                consultation_time_raw
+            )
+            schedule_status = "requested"
+        except _FieldError as exc:
+            errors.append(_field(exc.field, exc.code, exc.message))
+
+    if errors:
+        return _error_response(
+            422,
+            "VALIDATION_ERROR",
+            "The consultation request contains invalid fields.",
+            errors,
+        )
+
+    # --- 3. Optional attachments (validate all trước khi ghi đĩa) --------
+    raw_uploads = [
+        value
+        for _, value in form.multi_items()
+        if isinstance(value, StarletteUploadFile) and value.filename
+    ]
+
+    if len(raw_uploads) > MAX_ATTACHMENTS_PER_REQUEST:
+        return _error_response(
+            413,
+            "TOO_MANY_FILES",
+            f"At most {MAX_ATTACHMENTS_PER_REQUEST} files are allowed.",
+        )
+
+    validated = []
+    total_bytes = 0
+    for upload in raw_uploads:
+        content = await upload.read()
+        size = len(content)
+
+        if size > MAX_ATTACHMENT_BYTES:
+            return _error_response(
+                413, "FILE_TOO_LARGE", "Each file must be at most 10MB."
+            )
+
+        total_bytes += size
+        if total_bytes > MAX_TOTAL_ATTACHMENT_BYTES:
+            return _error_response(
+                413, "REQUEST_TOO_LARGE", "Total upload size exceeds 30MB."
+            )
+
+        sniffed = _sniff_attachment_mime(content)
+        if sniffed is None:
+            return _error_response(
+                415,
+                "UNSUPPORTED_FILE_TYPE",
+                "Only JPEG, PNG and PDF files are allowed.",
+            )
+
+        validated.append((upload, content, sniffed, size))
+
+    # --- 4. Persist lead + attachments atomically ------------------------
+    entry = ConsultationEntry(
+        public_id=f"con_{uuid.uuid4().hex}",
+        name=name,
+        contact_value_raw=contact_raw,
+        contact_type=contact_type,
+        contact_value_normalized=contact_normalized,
+        message=message,
+        consultation_time_raw=consultation_time_raw or None,
+        preferred_date=preferred_date,
+        preferred_time=preferred_time,
+        lead_status="new",
+        schedule_status=schedule_status,
+        source="shopify_customization_page",
+    )
+
+    written_paths = []
+    try:
+        for upload, content, sniffed, size in validated:
+            extension = CONSULTATION_ALLOWED_TYPES[sniffed]
+            stored_file_name = f"{uuid.uuid4().hex}{extension}"
+            dest = UPLOAD_DIR / stored_file_name
+            dest.write_bytes(content)
+            written_paths.append(dest)
+
+            entry.files.append(
+                ConsultationFile(
+                    file_name=_sanitize_original_name(upload.filename),
+                    stored_file_name=stored_file_name,
+                    mime_type=sniffed,
+                    size_bytes=size,
+                    checksum=hashlib.sha256(content).hexdigest(),
+                )
+            )
+
+        db.add(entry)
+        db.commit()
+        db.refresh(entry)
+    except Exception:
+        db.rollback()
+        for path in written_paths:  # tránh orphan file
+            path.unlink(missing_ok=True)
+        return _error_response(
+            500, "INTERNAL_ERROR", "Could not save the consultation request."
+        )
 
     return JSONResponse(
         status_code=201,
         content={
             "success": True,
-            "id": entry.id,
-            "file_count": len(entry.files),
-            "message": "Consultation entry saved.",
+            "id": entry.public_id,
+            "lead_status": entry.lead_status,
+            "schedule_status": entry.schedule_status,
+            "message": "Consultation request received.",
         },
     )
 
