@@ -211,6 +211,7 @@
     </header>
 
     <main>
+      <h2 style="margin-top: 24px; font-size: 18px; color: var(--head);">Consultation Entries</h2>
       <div class="toolbar">
         <span class="count-badge">
           {{ entries|length }} entr{{ 'y' if entries|length == 1 else 'ies' }}
@@ -308,6 +309,50 @@
         </table>
         {% else %}
         <div class="empty">Chưa có consultation entry nào được lưu.</div>
+        {% endif %}
+      </div>
+
+      <h2 style="margin-top: 40px; font-size: 18px; color: var(--head);">Custom Size Requests</h2>
+      <div class="toolbar">
+        <span class="count-badge" style="background: #e53e3e;">
+          {{ custom_size_requests|length }} yêu cầu
+        </span>
+      </div>
+
+      <div class="table-wrap">
+        {% if custom_size_requests %}
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Sản phẩm</th>
+              <th>Mô tả tùy chỉnh</th>
+              <th>Liên hệ</th>
+              <th>Thời gian</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for req in custom_size_requests %}
+            <tr>
+              <td>{{ req.id }}</td>
+              <td>
+                <div style="font-weight: 600;">{{ req.product_name }}</div>
+                <div class="muted" style="font-size: 12px; margin-top: 2px">
+                  ID: {{ req.product_id }}<br/>
+                  Handle: {{ req.product_handle }}
+                </div>
+              </td>
+              <td class="msg-cell">{{ req.custom_size_description }}</td>
+              <td>{{ req.customer_contact }}</td>
+              <td class="muted">
+                {{ req.created_at.strftime('%Y-%m-%d %H:%M:%S') }} UTC
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <div class="empty">Chưa có custom size request nào được lưu.</div>
         {% endif %}
       </div>
     </main>

@@ -531,12 +531,16 @@ def admin_page(request: Request, db: Session = Depends(get_db)) -> HTMLResponse:
     entries = (
         db.query(ConsultationEntry).order_by(ConsultationEntry.created_at.desc()).all()
     )
+    custom_size_requests = (
+        db.query(CustomSizeRequest).order_by(CustomSizeRequest.created_at.desc()).all()
+    )
 
     return templates.TemplateResponse(
         "admin.html",
         {
             "request": request,
             "entries": entries,
+            "custom_size_requests": custom_size_requests,
         },
     )
 
