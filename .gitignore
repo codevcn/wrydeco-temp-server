@@ -8,3 +8,4 @@ uploads/
 .env
 *zip
 doc
+.playwright-mcp/

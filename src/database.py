@@ -97,6 +97,22 @@ class ConsultationFile(Base):
     entry = relationship("ConsultationEntry", back_populates="files")
 
 
+class CustomSizeRequest(Base):
+    """A quick custom size request submitted by a customer."""
+
+    __tablename__ = "custom_size_requests"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    product_id = Column(String(255), nullable=False)
+    product_handle = Column(String(512), nullable=False)
+    product_name = Column(String(512), nullable=False)
+    custom_size_description = Column(Text, nullable=False)
+    customer_contact = Column(String(320), nullable=False)
+
+    created_at = Column(DateTime, default=_utcnow, nullable=False)
+
+
 def init_db() -> None:
     """Create tables if they do not exist yet."""
     Base.metadata.create_all(bind=engine)

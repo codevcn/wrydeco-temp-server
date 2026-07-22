@@ -26,7 +26,7 @@ from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 from starlette.datastructures import UploadFile as StarletteUploadFile
 from .config import TEMPLATES_DIR, UPLOAD_DIR
-from .database import ConsultationEntry, ConsultationFile, get_db, init_db
+from .database import ConsultationEntry, ConsultationFile, CustomSizeRequest, get_db, init_db
 
 app = FastAPI(title="Wrydeco Shopify Consultation Server")
 
@@ -452,6 +452,76 @@ async def create_consultation(
             "lead_status": entry.lead_status,
             "schedule_status": entry.schedule_status,
             "message": "Consultation request received.",
+        },
+    )
+
+
+@app.post("/api/custom-size-requests")
+async def create_custom_size_request(
+    request: Request,
+    db: Session = Depends(get_db),
+) -> JSONResponse:
+    try:
+        form = await request.form()
+    except Exception:
+        return _error_response(
+            400, "MALFORMED_REQUEST", "The multipart request is malformed."
+        )
+
+    errors = []
+
+    product_id = str(form.get("product_id") or "").strip()
+    if not product_id:
+        errors.append(_field("product_id", "REQUIRED", "Product ID is required."))
+
+    product_handle = str(form.get("product_handle") or "").strip()
+    if not product_handle:
+        errors.append(_field("product_handle", "REQUIRED", "Product handle is required."))
+
+    product_name = str(form.get("product_name") or "").strip()
+    if not product_name:
+        errors.append(_field("product_name", "REQUIRED", "Product name is required."))
+
+    custom_size_description = str(form.get("custom_size_description") or "").strip()
+    if not custom_size_description:
+        errors.append(_field("custom_size_description", "REQUIRED", "Custom size description is required."))
+
+    customer_contact = str(form.get("customer_contact") or "").strip()
+    if not customer_contact:
+        errors.append(_field("customer_contact", "REQUIRED", "Customer contact is required."))
+
+    if errors:
+        return _error_response(
+            422,
+            "VALIDATION_ERROR",
+            "The request contains invalid fields.",
+            errors,
+        )
+
+    entry = CustomSizeRequest(
+        product_id=product_id,
+        product_handle=product_handle,
+        product_name=product_name,
+        custom_size_description=custom_size_description,
+        customer_contact=customer_contact,
+    )
+
+    try:
+        db.add(entry)
+        db.commit()
+        db.refresh(entry)
+    except Exception:
+        db.rollback()
+        return _error_response(
+            500, "INTERNAL_ERROR", "Could not save the custom size request."
+        )
+
+    return JSONResponse(
+        status_code=201,
+        content={
+            "success": True,
+            "id": entry.id,
+            "message": "Custom size request received.",
         },
     )
 
