@@ -7,5 +7,6 @@ uploads/
 *.db
 .env
 *zip
-doc
+doc/
 .playwright-mcp/
+doc/connect-vps.md

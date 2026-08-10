@@ -28,7 +28,13 @@ from starlette.datastructures import UploadFile as StarletteUploadFile
 from .config import TEMPLATES_DIR, UPLOAD_DIR
 from .database import ConsultationEntry, ConsultationFile, CustomSizeRequest, get_db, init_db
 
-app = FastAPI(title="Wrydeco Shopify Consultation Server")
+app = FastAPI(
+    title="Wrydeco Shopify Consultation Server",
+    description="API document cho server nhận yêu cầu tư vấn và custom size từ Shopify.",
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
+)
 
 app.add_middleware(
     CORSMiddleware,
@@ -83,7 +89,7 @@ def on_startup() -> None:
     IMAGE_UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 
-@app.get("/api/health")
+@app.get("/api/health", tags=["Health"], summary="Kiểm tra trạng thái server")
 def healthcheck() -> JSONResponse:
     return JSONResponse(
         {
@@ -259,10 +265,23 @@ def _error_response(status_code: int, code: str, message: str, errors=None):
     return JSONResponse(status_code=status_code, content=body)
 
 
-@app.post("/api/consultations")
+@app.post(
+    "/api/consultations",
+    tags=["Consultation"],
+    summary="Gửi yêu cầu tư vấn mới",
+    description="Endpoint nhận FormData từ Shopify. Validate theo contract mới (phone_or_email)."
+)
 async def create_consultation(
     request: Request,
     db: Session = Depends(get_db),
+    # Dummy parameters để hiện form trên Swagger UI
+    name: Optional[str] = Form(None, description="Tên (bắt buộc)"),
+    phone_or_email: Optional[str] = Form(None, description="Số điện thoại hoặc Email (bắt buộc theo contract mới)"),
+    email: Optional[str] = Form(None, description="Email (fallback cũ)"),
+    phone: Optional[str] = Form(None, description="Số điện thoại (fallback cũ)"),
+    message: Optional[str] = Form(None, description="Yêu cầu ngắn gọn (bắt buộc)"),
+    consultation_time: Optional[str] = Form(None, description="Thời gian hẹn ưu tiên (tuỳ chọn - format hh:mm AM/PM, dd/mm/yyyy)"),
+    files: Optional[list[UploadFile]] = File(None, description="Ảnh hoặc file đính kèm (tùy chọn, tối đa 10 tệp)"),
 ) -> JSONResponse:
     try:
         form = await request.form()
@@ -456,10 +475,21 @@ async def create_consultation(
     )
 
 
-@app.post("/api/custom-size-requests")
+@app.post(
+    "/api/custom-size-requests",
+    tags=["Custom Size"],
+    summary="Gửi yêu cầu Custom Size",
+    description="Endpoint nhận FormData yêu cầu kích thước tùy chỉnh từ sản phẩm."
+)
 async def create_custom_size_request(
     request: Request,
     db: Session = Depends(get_db),
+    # Dummy parameters để hiện form trên Swagger UI
+    product_id: Optional[str] = Form(None, description="ID Sản phẩm (bắt buộc)"),
+    product_handle: Optional[str] = Form(None, description="Handle Sản phẩm (bắt buộc)"),
+    product_name: Optional[str] = Form(None, description="Tên Sản phẩm (bắt buộc)"),
+    custom_size_description: Optional[str] = Form(None, description="Mô tả kích thước tùy chỉnh (bắt buộc)"),
+    customer_contact: Optional[str] = Form(None, description="Liên hệ khách hàng (bắt buộc)"),
 ) -> JSONResponse:
     try:
         form = await request.form()
@@ -526,7 +556,7 @@ async def create_custom_size_request(
     )
 
 
-@app.get("/admin", response_class=HTMLResponse)
+@app.get("/admin", response_class=HTMLResponse, include_in_schema=False)
 def admin_page(request: Request, db: Session = Depends(get_db)) -> HTMLResponse:
     entries = (
         db.query(ConsultationEntry).order_by(ConsultationEntry.created_at.desc()).all()
@@ -545,7 +575,7 @@ def admin_page(request: Request, db: Session = Depends(get_db)) -> HTMLResponse:
     )
 
 
-@app.get("/admin/files/{file_id}/view")
+@app.get("/admin/files/{file_id}/view", include_in_schema=False)
 def view_uploaded_file(file_id: int, db: Session = Depends(get_db)) -> FileResponse:
     """
     Mở file trong tab mới.
@@ -576,7 +606,7 @@ def view_uploaded_file(file_id: int, db: Session = Depends(get_db)) -> FileRespo
     )
 
 
-@app.get("/admin/files/{file_id}/download")
+@app.get("/admin/files/{file_id}/download", include_in_schema=False)
 def download_uploaded_file(file_id: int, db: Session = Depends(get_db)) -> FileResponse:
     """
     Tải file về máy với tên gốc.
@@ -606,10 +636,15 @@ def download_uploaded_file(file_id: int, db: Session = Depends(get_db)) -> FileR
     )
 
 
-@app.post("/api/upload-image")
+@app.post(
+    "/api/upload-image",
+    tags=["Uploads"],
+    summary="Upload ảnh đơn lẻ",
+    description="Upload 1 file ảnh (jpg, png, webp, gif) và trả về URL public."
+)
 async def upload_image(
     request: Request,
-    image: UploadFile = File(...),
+    image: UploadFile = File(..., description="File ảnh cần tải lên"),
 ) -> JSONResponse:
     """
     Upload 1 file ảnh, lưu vào server và trả về URL public để xem ảnh.
@@ -658,7 +693,7 @@ async def upload_image(
     )
 
 
-@app.get("/view-uploads", response_class=HTMLResponse)
+@app.get("/view-uploads", response_class=HTMLResponse, include_in_schema=False)
 def view_uploads_page(request: Request, db: Session = Depends(get_db)) -> HTMLResponse:
     """
     Trang hiển thị toàn bộ file đang nằm trong thư mục uploads/.
@@ -723,7 +758,7 @@ def view_uploads_page(request: Request, db: Session = Depends(get_db)) -> HTMLRe
     )
 
 
-@app.get("/view-uploads/download")
+@app.get("/view-uploads/download", include_in_schema=False)
 def download_uploaded_file_by_path(
     path: str = Query(...),
     db: Session = Depends(get_db),
