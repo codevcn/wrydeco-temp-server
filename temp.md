@@ -51,3 +51,13 @@ Yêu cầu cho ảnh kết quả là phải khóa (giữ nguyên) chính xác 10
 ```text
 Đây là ảnh kết quả, và sản phẩm trong ảnh bị sai kết cấu so với sản phẩm gốc phải ko? Bạn hãy fix lại prompt tạo ảnh của bạn theo hướng khóa cứng sản phẩm đi. Chỉ fix prompt (ko tạo ảnh, ko tạo file, ko tạo video gì hết).
 ```
+
+### 6. Tách sản phẩm ra 1 nền riêng
+
+> kèm ảnh sản phẩm gốc.
+
+```text
+Xác định chủ thể trong ảnh, tách chủ thể ra 1 ảnh riêng có nền trơn màu xám nhạt, giữ nguyên:
+- kết cấu của chủ thể
+- màu sắc trên toàn bộ chủ thể
+```

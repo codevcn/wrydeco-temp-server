@@ -60,6 +60,14 @@ MAX_IMAGE_UPLOAD_BYTES = 10 * 1024 * 1024  # 10MB mỗi ảnh
 
 IMAGE_UPLOAD_DIR = UPLOAD_DIR / "images"
 
+ALLOWED_VIDEO_CONTENT_TYPES = {
+    "video/mp4": ".mp4",
+    "video/webm": ".webm",
+    "video/quicktime": ".mov",
+}
+MAX_VIDEO_UPLOAD_BYTES = 100 * 1024 * 1024  # 100MB mỗi video
+VIDEO_UPLOAD_DIR = UPLOAD_DIR / "videos"
+
 # --- Consultation form contract (doc/consultation-form.md) ---------------
 
 # Attachment: chỉ chấp nhận MIME đã xác minh bằng magic bytes.
@@ -87,6 +95,7 @@ _SCHEDULE_RE = re.compile(
 def on_startup() -> None:
     init_db()
     IMAGE_UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+    VIDEO_UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 
 @app.get("/api/health", tags=["Health"], summary="Kiểm tra trạng thái server")
@@ -689,6 +698,62 @@ async def upload_image(
         status_code=201,
         content={
             "image_url": image_url,
+        },
+    )
+
+
+@app.post(
+    "/api/upload-video",
+    tags=["Uploads"],
+    summary="Upload video đơn lẻ",
+    description="Upload 1 file video (mp4, webm, mov) và trả về URL public."
+)
+async def upload_video(
+    request: Request,
+    video: UploadFile = File(..., description="File video cần tải lên"),
+) -> JSONResponse:
+    """
+    Upload 1 file video, lưu vào server và trả về URL public để nhúng video.
+    Field name khi gửi FormData phải là: video
+    """
+
+    if not video.filename:
+        raise HTTPException(status_code=400, detail="Video file is required.")
+
+    content_type = video.content_type or ""
+
+    if content_type not in ALLOWED_VIDEO_CONTENT_TYPES:
+        raise HTTPException(
+            status_code=400,
+            detail="Only mp4, webm, and mov videos are allowed.",
+        )
+
+    content = await video.read()
+
+    if len(content) > MAX_VIDEO_UPLOAD_BYTES:
+        raise HTTPException(
+            status_code=413,
+            detail="Video exceeds 100MB limit.",
+        )
+
+    VIDEO_UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+
+    extension = ALLOWED_VIDEO_CONTENT_TYPES[content_type]
+    stored_file_name = f"{uuid.uuid4().hex}{extension}"
+    dest = VIDEO_UPLOAD_DIR / stored_file_name
+
+    dest.write_bytes(content)
+
+    # Build absolute public URL.
+    scheme = request.headers.get("x-forwarded-proto", request.url.scheme)
+    host = request.headers.get("host", request.url.netloc)
+
+    video_url = f"{scheme}://{host}/uploads/videos/{stored_file_name}"
+
+    return JSONResponse(
+        status_code=201,
+        content={
+            "video_url": video_url,
         },
     )
 
