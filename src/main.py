@@ -25,7 +25,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 from starlette.datastructures import UploadFile as StarletteUploadFile
-from .config import TEMPLATES_DIR, UPLOAD_DIR
+from .config import STATIC_DIR, TEMPLATES_DIR, UPLOAD_DIR
 from .database import ConsultationEntry, ConsultationFile, CustomSizeRequest, get_db, init_db
 
 app = FastAPI(
@@ -793,3 +793,7 @@ def download_uploaded_file_by_path(
             )
         },
     )
+
+
+# Mount static files (favicons, etc.) at root path, placed at the end so it doesn't override API routes.
+app.mount("/", StaticFiles(directory=str(STATIC_DIR)), name="static")

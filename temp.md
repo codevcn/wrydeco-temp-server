@@ -28,3 +28,9 @@ Yêu cầu cho ảnh kết quả là phải khóa (giữ nguyên) chính xác 10
 - ánh sáng và các chi tiết vật thể trong khung cảnh tham chiếu
 - ko được regenerate lại cả khung cảnh để tránh tạo cảm giác nhìn khung cảnh bị "AI", phải giữ cứng khung cảnh
 ```
+
+### 3. Tuyệt đối ko thay đổi chi tiết sản phẩm
+
+```text
+(tuyệt đối ko được thay đổi bất cứ chi tiết nào về khung cảnh xung quanh và kết cấu sản phẩm và ánh sáng trong căn phòng)
+```
