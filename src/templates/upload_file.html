@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload File</title>
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <style>
+      :root {
+        --bg: #f4f6f8;
+        --card: #ffffff;
+        --border: #e2e8f0;
+        --text: #1a202c;
+        --muted: #718096;
+        --accent: #2b6cb0;
+        --accent-soft: #ebf4ff;
+        --head: #2d3748;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      header {
+        background: var(--head);
+        color: #fff;
+        padding: 20px 28px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 22px;
+      }
+
+      header p {
+        margin: 4px 0 0;
+        color: #cbd5e0;
+        font-size: 13px;
+      }
+
+      .nav-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        color: #fff;
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        transition: background 0.2s;
+      }
+
+      .nav-btn:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+
+      main {
+        padding: 24px 28px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .upload-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 24px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+
+      .upload-card h2 {
+        margin-top: 0;
+        font-size: 18px;
+        color: var(--head);
+        margin-bottom: 20px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+      
+      .form-group label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+        font-size: 14px;
+      }
+
+      .file-input-wrapper {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 16px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        border: 1px solid var(--border);
+        background: #fff;
+        color: var(--text);
+        transition: all 0.2s;
+      }
+
+      .btn:hover {
+        background: #f7fafc;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
+
+      .btn-primary:hover {
+        background: #2c5282;
+      }
+
+      .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .file-input-wrapper input[type="file"] {
+        font-size: 100px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .preview-section {
+        margin-top: 20px;
+        display: none;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+        background: #000;
+      }
+
+      .preview-section video {
+        width: 100%;
+        max-height: 400px;
+        display: block;
+      }
+      
+      .file-name-display {
+        margin-top: 8px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .status-message {
+        margin-top: 16px;
+        padding: 12px;
+        border-radius: 6px;
+        font-size: 14px;
+        display: none;
+      }
+
+      .status-success {
+        background: #c6f6d5;
+        color: #22543d;
+        border: 1px solid #9ae6b4;
+      }
+
+      .status-error {
+        background: #fed7d7;
+        color: #822727;
+        border: 1px solid #feb2b2;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div>
+        <h1>Upload File</h1>
+        <p>Tải file video lên server</p>
+      </div>
+      <nav>
+        <a href="/admin" class="nav-btn">← Admin Page</a>
+        <a href="/view-uploads" class="nav-btn" style="margin-left: 8px;">View Uploads</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="upload-card">
+        <h2>Upload Video</h2>
+        
+        <form id="uploadForm">
+          <div class="form-group">
+            <label>Chọn video từ thiết bị (mp4, webm, mov - Tối đa 100MB)</label>
+            <div class="file-input-wrapper">
+              <button type="button" class="btn">Chọn File Video</button>
+              <input type="file" id="videoInput" accept="video/mp4, video/webm, video/quicktime" />
+            </div>
+            <div id="fileNameDisplay" class="file-name-display">Chưa chọn file nào.</div>
+          </div>
+
+          <div id="previewSection" class="preview-section">
+            <video id="videoPreview" controls preload="metadata">
+              Trình duyệt của bạn không hỗ trợ thẻ video.
+            </video>
+          </div>
+
+          <div style="margin-top: 24px; border-top: 1px solid var(--border); padding-top: 20px;">
+            <button type="submit" id="submitBtn" class="btn btn-primary" disabled>
+              Tải lên Server
+            </button>
+          </div>
+          
+          <div id="statusMessage" class="status-message"></div>
+        </form>
+      </div>
+    </main>
+
+    <script>
+      const videoInput = document.getElementById('videoInput');
+      const videoPreview = document.getElementById('videoPreview');
+      const previewSection = document.getElementById('previewSection');
+      const submitBtn = document.getElementById('submitBtn');
+      const fileNameDisplay = document.getElementById('fileNameDisplay');
+      const uploadForm = document.getElementById('uploadForm');
+      const statusMessage = document.getElementById('statusMessage');
+
+      videoInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        
+        if (file) {
+          fileNameDisplay.textContent = file.name + ' (' + (file.size / (1024 * 1024)).toFixed(2) + ' MB)';
+          
+          // Check limit (100MB)
+          if (file.size > 100 * 1024 * 1024) {
+            showStatus('File quá lớn. Dung lượng tối đa là 100MB.', 'error');
+            submitBtn.disabled = true;
+            previewSection.style.display = 'none';
+            return;
+          }
+
+          // Create object URL for preview
+          const fileURL = URL.createObjectURL(file);
+          videoPreview.src = fileURL;
+          previewSection.style.display = 'block';
+          submitBtn.disabled = false;
+          hideStatus();
+        } else {
+          fileNameDisplay.textContent = 'Chưa chọn file nào.';
+          previewSection.style.display = 'none';
+          videoPreview.src = '';
+          submitBtn.disabled = true;
+        }
+      });
+
+      uploadForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const file = videoInput.files[0];
+        if (!file) return;
+
+        const formData = new FormData();
+        formData.append('video', file);
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Đang tải lên...';
+        hideStatus();
+
+        try {
+          const response = await fetch('/api/upload-video', {
+            method: 'POST',
+            body: formData
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            showStatus('Tải lên thành công! URL của video: ' + result.video_url, 'success');
+            // Reset form
+            videoInput.value = '';
+            previewSection.style.display = 'none';
+            fileNameDisplay.textContent = 'Chưa chọn file nào.';
+            submitBtn.textContent = 'Tải lên Server';
+          } else {
+            showStatus('Lỗi: ' + (result.detail || result.message || 'Không thể tải lên server'), 'error');
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Tải lên Server';
+          }
+        } catch (error) {
+          showStatus('Lỗi kết nối: ' + error.message, 'error');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Tải lên Server';
+        }
+      });
+
+      function showStatus(msg, type) {
+        statusMessage.textContent = msg;
+        statusMessage.className = 'status-message status-' + type;
+        statusMessage.style.display = 'block';
+      }
+
+      function hideStatus() {
+        statusMessage.style.display = 'none';
+      }
+    </script>
+  </body>
+</html>

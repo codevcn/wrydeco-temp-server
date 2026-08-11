@@ -54,6 +54,25 @@
         font-size: 13px;
       }
 
+      .nav-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        color: #fff;
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        transition: background 0.2s;
+      }
+
+      .nav-btn:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+
       main {
         padding: 24px 28px;
       }
@@ -211,9 +230,14 @@
   </head>
 
   <body>
-    <header>
-      <h1>Admin Manager Page</h1>
-      <p>Consultation Entries &mdash; Wrydeco Shopify Store</p>
+    <header style="display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <h1>Admin Manager Page</h1>
+        <p>Consultation Entries &mdash; Wrydeco Shopify Store</p>
+      </div>
+      <nav>
+        <a href="/upload-file" class="nav-btn">Upload File</a>
+      </nav>
     </header>
 
     <main>

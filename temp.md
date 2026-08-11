@@ -32,7 +32,7 @@ Yêu cầu cho ảnh kết quả là phải khóa (giữ nguyên) chính xác 10
 ### 3. Tuyệt đối ko thay đổi chi tiết sản phẩm
 
 ```text
-(tuyệt đối ko được thay đổi bất cứ chi tiết nào về khung cảnh xung quanh và kết cấu sản phẩm và ánh sáng trong căn phòng)
+(tuyệt đối ko được thay đổi bất cứ chi tiết nào về: khung cảnh xung quanh, kết cấu sản phẩm, màu sắc sản phẩm, ánh sáng trong căn phòng)
 ```
 
 ### 4. Chụp các góc khác nhau của sản phẩm

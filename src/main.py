@@ -860,5 +860,15 @@ def download_uploaded_file_by_path(
     )
 
 
+@app.get("/upload-file", response_class=HTMLResponse, include_in_schema=False)
+def upload_file_page(request: Request) -> HTMLResponse:
+    return templates.TemplateResponse(
+        "upload_file.html",
+        {
+            "request": request,
+        },
+    )
+
+
 # Mount static files (favicons, etc.) at root path, placed at the end so it doesn't override API routes.
 app.mount("/", StaticFiles(directory=str(STATIC_DIR)), name="static")
