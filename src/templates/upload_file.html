@@ -194,6 +194,85 @@
         color: #822727;
         border: 1px solid #feb2b2;
       }
+
+      .table-wrap {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow-x: auto;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+        margin-top: 24px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      thead th {
+        background: #edf2f7;
+        text-align: left;
+        padding: 12px 14px;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--muted);
+        border-bottom: 1px solid var(--border);
+        white-space: nowrap;
+      }
+
+      tbody td {
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--border);
+        font-size: 14px;
+        vertical-align: middle;
+      }
+
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      tbody tr:hover {
+        background: #f7fafc;
+      }
+      
+      .empty {
+        padding: 40px;
+        text-align: center;
+        color: var(--muted);
+      }
+
+      .url-cell {
+        max-width: 300px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-family: monospace;
+      }
+      .url-cell a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      .url-cell a:hover {
+        text-decoration: underline;
+      }
+      
+      .copy-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-size: 12px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        border: 1px solid #bee3f8;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .copy-btn:hover {
+        text-decoration: underline;
+      }
     </style>
   </head>
 
@@ -237,6 +316,40 @@
           
           <div id="statusMessage" class="status-message"></div>
         </form>
+      </div>
+
+      <div class="upload-card" style="margin-top: 24px;">
+        <h2>Danh sách Video đã tải lên</h2>
+        <div class="table-wrap">
+          {% if uploaded_videos %}
+          <table>
+            <thead>
+              <tr>
+                <th>Tên file</th>
+                <th>Dung lượng</th>
+                <th>Public URL</th>
+                <th>Hành động</th>
+                <th>Thời gian tải lên</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for v in uploaded_videos %}
+              <tr>
+                <td>{{ v.name }}</td>
+                <td>{{ v.size }}</td>
+                <td class="url-cell" title="{{ v.url }}"><a href="{{ v.url }}" target="_blank">{{ v.url }}</a></td>
+                <td>
+                  <button type="button" class="copy-btn" onclick="navigator.clipboard.writeText('{{ v.url }}'); alert('Đã copy URL!');">Copy URL</button>
+                </td>
+                <td class="muted">{{ v.created_at }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
+          <div class="empty">Chưa có video nào được lưu.</div>
+          {% endif %}
+        </div>
       </div>
     </main>
 

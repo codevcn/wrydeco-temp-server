@@ -862,10 +862,28 @@ def download_uploaded_file_by_path(
 
 @app.get("/upload-file", response_class=HTMLResponse, include_in_schema=False)
 def upload_file_page(request: Request) -> HTMLResponse:
+    uploaded_videos = []
+    if VIDEO_UPLOAD_DIR.exists():
+        for file_path in VIDEO_UPLOAD_DIR.rglob("*"):
+            if file_path.is_file():
+                stat = file_path.stat()
+                scheme = request.headers.get("x-forwarded-proto", request.url.scheme)
+                host = request.headers.get("host", request.url.netloc)
+                video_url = f"{scheme}://{host}/uploads/videos/{file_path.name}"
+                
+                uploaded_videos.append({
+                    "name": file_path.name,
+                    "url": video_url,
+                    "size": _format_file_size(stat.st_size),
+                    "created_at": datetime.fromtimestamp(stat.st_mtime, timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+                })
+    uploaded_videos.sort(key=lambda x: x["created_at"], reverse=True)
+
     return templates.TemplateResponse(
         "upload_file.html",
         {
             "request": request,
+            "uploaded_videos": uploaded_videos,
         },
     )
 
