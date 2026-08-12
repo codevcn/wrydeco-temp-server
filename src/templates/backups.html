@@ -37,6 +37,8 @@
       .file-name { font-weight: 600; word-break: break-word; }
       .download-link { display: inline-flex; align-items: center; justify-content: center; padding: 6px 10px; border-radius: 999px; font-size: 13px; color: var(--accent); background: var(--accent-soft); border: 1px solid #bee3f8; text-decoration: none; white-space: nowrap; }
       .download-link:hover { text-decoration: underline; }
+      .delete-btn { display: inline-flex; align-items: center; justify-content: center; padding: 6px 10px; border-radius: 999px; font-size: 13px; color: #fff; background: #e53e3e; border: none; cursor: pointer; margin-left: 8px; white-space: nowrap; }
+      .delete-btn:hover { background: #c53030; }
       .muted { color: var(--muted); }
       .empty { padding: 48px 24px; text-align: center; color: var(--muted); }
     </style>
@@ -58,7 +60,7 @@
               <th>Tên file</th>
               <th>Dung lượng</th>
               <th>Thời gian tạo</th>
-              <th>Tải về</th>
+              <th>Hành động</th>
             </tr>
           </thead>
           <tbody>
@@ -71,6 +73,7 @@
                 <a class="download-link" href="/admin/backups/download?filename={{ b.name | urlencode }}">
                   Tải file ZIP
                 </a>
+                <button class="delete-btn" onclick="deleteBackup('{{ b.name }}')">Xóa</button>
               </td>
             </tr>
             {% endfor %}
@@ -81,5 +84,23 @@
         {% endif %}
       </div>
     </main>
+    <script>
+      async function deleteBackup(filename) {
+        if (!confirm(`Bạn có chắc chắn muốn xóa file ${filename}?`)) return;
+        try {
+          const res = await fetch(`/admin/backups/delete?filename=${encodeURIComponent(filename)}`, {
+            method: 'DELETE'
+          });
+          if (res.ok) {
+            window.location.reload();
+          } else {
+            const data = await res.json();
+            alert("Lỗi: " + (data.detail || data.message || "Không thể xóa file."));
+          }
+        } catch (error) {
+          alert("Lỗi kết nối: " + error.message);
+        }
+      }
+    </script>
   </body>
 </html>

@@ -969,6 +969,22 @@ def download_backup(filename: str = Query(...)) -> FileResponse:
         }
     )
 
+@app.delete("/admin/backups/delete", include_in_schema=False)
+def delete_backup(filename: str = Query(...)):
+    file_path = BACKUP_COMPRESS_DIR / filename
+    
+    # Path traversal protection
+    try:
+        file_path.resolve().relative_to(BACKUP_COMPRESS_DIR.resolve())
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid file path.")
+
+    if not file_path.exists() or not file_path.is_file() or not filename.endswith(".zip"):
+        raise HTTPException(status_code=404, detail="Backup file not found.")
+    
+    file_path.unlink()
+    return {"success": True, "message": "File deleted successfully."}
+
 
 @app.get("/admin/settings", response_class=HTMLResponse, include_in_schema=False)
 def view_settings_page(request: Request) -> HTMLResponse:
