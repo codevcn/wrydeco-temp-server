@@ -3,6 +3,7 @@
 import hashlib
 import mimetypes
 import re
+import shutil
 import uuid
 from datetime import date, datetime, time, timezone
 from pathlib import Path
@@ -25,7 +26,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 from starlette.datastructures import UploadFile as StarletteUploadFile
-from .config import STATIC_DIR, TEMPLATES_DIR, UPLOAD_DIR
+from .config import STATIC_DIR, TEMPLATES_DIR, UPLOAD_DIR, BACKUP_COMPRESS_DIR
 from .database import ConsultationEntry, ConsultationFile, CustomSizeRequest, get_db, init_db
 
 app = FastAPI(
@@ -642,6 +643,30 @@ def download_uploaded_file(file_id: int, db: Session = Depends(get_db)) -> FileR
                 file_record.file_name or file_record.stored_file_name,
             )
         },
+    )
+
+
+@app.get("/admin/export-uploads", include_in_schema=False)
+def export_uploads() -> FileResponse:
+    """
+    Export toàn bộ thư mục uploads thành 1 file zip và tải về.
+    Lưu tại thư mục backup/compress theo yêu cầu.
+    """
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+    zip_filename = f"uploads_backup_{timestamp}"
+    zip_filepath = BACKUP_COMPRESS_DIR / zip_filename
+    
+    # shutil.make_archive adds the .zip extension automatically
+    shutil.make_archive(str(zip_filepath), 'zip', str(UPLOAD_DIR))
+    
+    final_zip_path = zip_filepath.with_suffix('.zip')
+    
+    return FileResponse(
+        path=final_zip_path,
+        media_type="application/zip",
+        headers={
+            "Content-Disposition": f"attachment; filename=\"{zip_filename}.zip\""
+        }
     )
 
 

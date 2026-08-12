@@ -247,9 +247,14 @@
           {{ entries|length }} entr{{ 'y' if entries|length == 1 else 'ies' }}
         </span>
 
-        <a class="toolbar-btn" href="/view-uploads">
-          Xem tất cả file đã tải lên
-        </a>
+        <div style="display: flex; gap: 8px;">
+          <a class="toolbar-btn" href="/view-uploads">
+            Xem tất cả file đã tải lên
+          </a>
+          <a class="toolbar-btn" href="/admin/export-uploads" style="background: #38a169; border-color: #38a169;">
+            Export Data (ZIP)
+          </a>
+        </div>
       </div>
 
       <div class="table-wrap">

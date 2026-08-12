@@ -8,6 +8,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 UPLOAD_DIR = BASE_DIR / "uploads"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
+# Directory for backups
+BACKUP_COMPRESS_DIR = BASE_DIR / "backup" / "compress"
+BACKUP_COMPRESS_DIR.mkdir(parents=True, exist_ok=True)
+
 # SQLite database file location.
 DB_PATH = BASE_DIR / "data" / "consultations.db"
 DB_PATH.parent.mkdir(parents=True, exist_ok=True)

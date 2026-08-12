@@ -22,7 +22,7 @@ def deploy():
     run_local("git add .")
     status = subprocess.run("git status --porcelain", shell=True, capture_output=True, text=True)
     if status.stdout.strip():
-        run_local("git commit -m \"Auto deploy from Antigravity Agent: add Swagger API docs\"")
+        run_local("git commit -m \"Auto deploy from Antigravity Agent: add Export Data ZIP feature\"")
         run_local("git push origin main")
     else:
         print("Khong co thay doi de commit. Tiep tuc deploy.")
