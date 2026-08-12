@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Backup Files</title>
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <style>
+      :root {
+        --bg: #f4f6f8;
+        --card: #ffffff;
+        --border: #e2e8f0;
+        --text: #1a202c;
+        --muted: #718096;
+        --accent: #2b6cb0;
+        --accent-soft: #ebf4ff;
+        --head: #2d3748;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; background: var(--bg); color: var(--text); }
+      header { background: var(--head); color: #fff; padding: 20px 28px; }
+      header h1 { margin: 0; font-size: 22px; }
+      header p { margin: 4px 0 0; color: #cbd5e0; font-size: 13px; }
+      main { padding: 24px 28px; }
+      .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+      .toolbar-left, .toolbar-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+      .btn { display: inline-flex; align-items: center; justify-content: center; padding: 8px 12px; border-radius: 999px; font-size: 13px; text-decoration: none; border: 1px solid var(--border); background: #fff; color: var(--text); }
+      .btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+      .btn:hover { text-decoration: underline; }
+      .count-badge { background: var(--accent); color: #fff; border-radius: 999px; padding: 6px 12px; font-size: 13px; }
+      .table-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06); }
+      table { width: 100%; border-collapse: collapse; min-width: 600px; }
+      thead th { background: #edf2f7; text-align: left; padding: 12px 14px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); border-bottom: 1px solid var(--border); white-space: nowrap; }
+      tbody td { padding: 12px 14px; border-bottom: 1px solid var(--border); font-size: 14px; vertical-align: top; }
+      tbody tr:last-child td { border-bottom: none; }
+      tbody tr:hover { background: #f7fafc; }
+      .file-name { font-weight: 600; word-break: break-word; }
+      .download-link { display: inline-flex; align-items: center; justify-content: center; padding: 6px 10px; border-radius: 999px; font-size: 13px; color: var(--accent); background: var(--accent-soft); border: 1px solid #bee3f8; text-decoration: none; white-space: nowrap; }
+      .download-link:hover { text-decoration: underline; }
+      .muted { color: var(--muted); }
+      .empty { padding: 48px 24px; text-align: center; color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Backup Files</h1>
+      <p>Danh sách các bản sao lưu đã nén thành file ZIP (từ thư mục backup/compress).</p>
+    </header>
+    <main>
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <a class="btn" href="/admin">← Quay lại Admin</a>
+          <span class="count-badge">{{ backups|length }} file</span>
+        </div>
+      </div>
+      <div class="table-wrap">
+        {% if backups %}
+        <table>
+          <thead>
+            <tr>
+              <th>Tên file</th>
+              <th>Dung lượng</th>
+              <th>Thời gian tạo</th>
+              <th>Tải về</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for b in backups %}
+            <tr>
+              <td><div class="file-name">{{ b.name }}</div></td>
+              <td>{{ b.size }}</td>
+              <td class="muted">{{ b.created_at }}</td>
+              <td>
+                <a class="download-link" href="/admin/backups/download?filename={{ b.name | urlencode }}">
+                  Tải file ZIP
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <div class="empty">Chưa có file backup nào.</div>
+        {% endif %}
+      </div>
+    </main>
+  </body>
+</html>

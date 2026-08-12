@@ -913,5 +913,49 @@ def upload_file_page(request: Request) -> HTMLResponse:
     )
 
 
+@app.get("/admin/backups", response_class=HTMLResponse, include_in_schema=False)
+def view_backups_page(request: Request) -> HTMLResponse:
+    backups = []
+    if BACKUP_COMPRESS_DIR.exists():
+        for file_path in BACKUP_COMPRESS_DIR.iterdir():
+            if file_path.is_file() and file_path.name.endswith(".zip"):
+                stat = file_path.stat()
+                backups.append({
+                    "name": file_path.name,
+                    "size": _format_file_size(stat.st_size),
+                    "created_at": datetime.fromtimestamp(stat.st_mtime, timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+                })
+    backups.sort(key=lambda x: x["created_at"], reverse=True)
+
+    return templates.TemplateResponse(
+        "backups.html",
+        {
+            "request": request,
+            "backups": backups,
+        },
+    )
+
+@app.get("/admin/backups/download", include_in_schema=False)
+def download_backup(filename: str = Query(...)) -> FileResponse:
+    file_path = BACKUP_COMPRESS_DIR / filename
+    
+    # Path traversal protection
+    try:
+        file_path.relative_to(BACKUP_COMPRESS_DIR.resolve())
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid file path.")
+
+    if not file_path.exists() or not file_path.is_file() or not filename.endswith(".zip"):
+        raise HTTPException(status_code=404, detail="Backup file not found.")
+    
+    return FileResponse(
+        path=file_path,
+        media_type="application/zip",
+        headers={
+            "Content-Disposition": f"attachment; filename=\"{filename}\""
+        }
+    )
+
+
 # Mount static files (favicons, etc.) at root path, placed at the end so it doesn't override API routes.
 app.mount("/", StaticFiles(directory=str(STATIC_DIR)), name="static")
