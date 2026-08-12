@@ -726,7 +726,7 @@ async def upload_image(
     tag_part = ""
     if tag:
         safe_tag = re.sub(r'[^a-zA-Z0-9_\-]', '_', tag)
-        tag_part = f"-{safe_tag}"
+        tag_part = f"--{safe_tag}"
         
     stored_file_name = f"{uuid.uuid4().hex}{tag_part}{extension}"
     dest = IMAGE_UPLOAD_DIR / stored_file_name
