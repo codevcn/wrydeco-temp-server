@@ -1,0 +1,50 @@
+<style>
+  .nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: background 0.2s;
+  }
+  .nav-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+  .header-container {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    background: var(--head, #2d3748); 
+    color: #fff; 
+    padding: 20px 28px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .header-container h1 {
+    margin: 0; 
+    font-size: 22px;
+  }
+  .header-container p {
+    margin: 4px 0 0; 
+    color: #cbd5e0; 
+    font-size: 13px;
+  }
+</style>
+<header class="header-container">
+  <div>
+    <h1>Wrydeco Temp Server</h1>
+    <p>Consultation Entries &mdash; Wrydeco Shopify Store</p>
+  </div>
+  <nav style="display: flex; gap: 8px; flex-wrap: wrap;">
+    <a href="/admin" class="nav-btn">Home</a>
+    <a href="/upload-file" class="nav-btn">Upload File</a>
+    <a href="/admin/backups" class="nav-btn">Backups</a>
+    <a href="/view-uploads" class="nav-btn">View Uploads</a>
+  </nav>
+</header>
