@@ -5,6 +5,7 @@ import mimetypes
 import re
 import shutil
 import uuid
+import zipfile
 from datetime import date, datetime, time, timezone
 from pathlib import Path
 from typing import Optional
@@ -999,6 +1000,32 @@ def delete_all_uploads(db: Session = Depends(get_db)):
     db.commit()
 
     return {"success": True}
+
+@app.post("/admin/settings/restore-uploads", include_in_schema=False)
+async def restore_uploads(file: UploadFile = File(...)):
+    if not file.filename.endswith(".zip"):
+        raise HTTPException(status_code=400, detail="File must be a ZIP archive.")
+
+    # Save uploaded zip temporarily
+    temp_zip_path = BACKUP_COMPRESS_DIR / f"temp_restore_{uuid.uuid4().hex}.zip"
+    try:
+        content = await file.read()
+        temp_zip_path.write_bytes(content)
+
+        # Extract it into UPLOAD_DIR
+        with zipfile.ZipFile(temp_zip_path, 'r') as zip_ref:
+            zip_ref.extractall(UPLOAD_DIR)
+
+    except zipfile.BadZipFile:
+        raise HTTPException(status_code=400, detail="The uploaded file is not a valid ZIP archive.")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    finally:
+        # Cleanup
+        if temp_zip_path.exists():
+            temp_zip_path.unlink()
+
+    return {"success": True, "message": "Uploads restored successfully."}
 
 
 # Mount static files (favicons, etc.) at root path, placed at the end so it doesn't override API routes.

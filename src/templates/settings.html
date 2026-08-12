@@ -35,6 +35,18 @@
         <h2 style="margin-top: 0;">Settings</h2>
         <p>Khu vực cấu hình và quản lý dữ liệu hệ thống.</p>
         
+        <h3 style="color: var(--accent);">Khôi phục Dữ liệu (Restore)</h3>
+        <p style="font-size: 14px; color: var(--muted); margin-bottom: 16px;">
+          Tải lên file ZIP backup để khôi phục toàn bộ các file đã upload. File ZIP này sẽ được giải nén trực tiếp vào thư mục uploads trên server.
+        </p>
+        
+        <form id="restoreForm" style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+          <input type="file" id="restoreFile" accept=".zip,application/zip" style="border: 1px solid var(--border); padding: 8px; border-radius: 6px; font-size: 14px; flex-grow: 1;" required />
+          <button type="submit" id="restoreBtn" class="btn-danger" style="background: var(--accent);">Khôi phục</button>
+        </form>
+        
+        <div id="restoreMsg" class="message"></div>
+        
         <hr style="border: 0; border-top: 1px solid var(--border); margin: 24px 0;" />
         
         <h3 style="color: var(--danger);">Danger Zone</h3>
@@ -98,6 +110,50 @@
         } catch (error) {
           showMsg("QUÁ TRÌNH BỊ HỦY: " + error.message, "error");
           resetBtn.disabled = false;
+        }
+      });
+
+      const restoreForm = document.getElementById('restoreForm');
+      const restoreFile = document.getElementById('restoreFile');
+      const restoreBtn = document.getElementById('restoreBtn');
+      const restoreMsg = document.getElementById('restoreMsg');
+
+      function showRestoreMsg(text, type) {
+        restoreMsg.textContent = text;
+        restoreMsg.className = 'message msg-' + type;
+        restoreMsg.style.display = 'block';
+      }
+
+      restoreForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const file = restoreFile.files[0];
+        if (!file) return;
+
+        if (!confirm("Hành động này sẽ giải nén file ZIP vào thư mục uploads trên máy chủ. Các file trùng tên sẽ bị ghi đè. Bạn có chắc chắn?")) return;
+
+        restoreBtn.disabled = true;
+        showRestoreMsg("Đang tải file lên và giải nén...", "info");
+
+        const formData = new FormData();
+        formData.append('file', file);
+
+        try {
+          const res = await fetch('/admin/settings/restore-uploads', {
+            method: 'POST',
+            body: formData
+          });
+
+          const result = await res.json();
+          if (res.ok) {
+            showRestoreMsg("Khôi phục dữ liệu thành công!", "success");
+            restoreForm.reset();
+          } else {
+            showRestoreMsg("Lỗi: " + (result.detail || result.message || "Không thể khôi phục dữ liệu."), "error");
+          }
+        } catch (error) {
+          showRestoreMsg("Lỗi kết nối: " + error.message, "error");
+        } finally {
+          restoreBtn.disabled = false;
         }
       });
     </script>
