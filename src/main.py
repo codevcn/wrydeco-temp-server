@@ -692,10 +692,12 @@ def export_uploads() -> FileResponse:
 async def upload_image(
     request: Request,
     image: UploadFile = File(..., description="File ảnh cần tải lên"),
+    tag: Optional[str] = Form(None, description="Tag tùy chọn để đính kèm vào tên file"),
 ) -> JSONResponse:
     """
     Upload 1 file ảnh, lưu vào server và trả về URL public để xem ảnh.
     Field name khi gửi FormData phải là: image
+    Có thể gửi thêm field: tag (string)
     """
 
     if not image.filename:
@@ -720,7 +722,13 @@ async def upload_image(
     IMAGE_UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
     extension = ALLOWED_IMAGE_CONTENT_TYPES[content_type]
-    stored_file_name = f"{uuid.uuid4().hex}{extension}"
+    
+    tag_part = ""
+    if tag:
+        safe_tag = re.sub(r'[^a-zA-Z0-9_\-]', '_', tag)
+        tag_part = f"-{safe_tag}"
+        
+    stored_file_name = f"{uuid.uuid4().hex}{tag_part}{extension}"
     dest = IMAGE_UPLOAD_DIR / stored_file_name
 
     dest.write_bytes(content)
