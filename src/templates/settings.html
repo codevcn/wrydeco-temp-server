@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings</title>
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <style>
+      :root {
+        --bg: #f4f6f8;
+        --card: #ffffff;
+        --border: #e2e8f0;
+        --text: #1a202c;
+        --muted: #718096;
+        --accent: #2b6cb0;
+        --danger: #e53e3e;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; background: var(--bg); color: var(--text); }
+      main { padding: 24px 28px; max-width: 800px; margin: 0 auto; }
+      .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 24px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06); }
+      .btn-danger { background: var(--danger); color: white; border: none; padding: 10px 16px; border-radius: 6px; font-weight: 500; cursor: pointer; transition: background 0.2s; }
+      .btn-danger:hover { background: #c53030; }
+      .btn-danger:disabled { opacity: 0.5; cursor: not-allowed; }
+      .message { margin-top: 16px; font-size: 14px; display: none; padding: 12px; border-radius: 6px; }
+      .msg-info { background: #ebf8ff; color: #2b6cb0; border: 1px solid #bee3f8; }
+      .msg-success { background: #f0fff4; color: #2f855a; border: 1px solid #c6f6d5; }
+      .msg-error { background: #fff5f5; color: #c53030; border: 1px solid #fed7d7; }
+    </style>
+  </head>
+  <body>
+    {% include 'header.html' %}
+    <main>
+      <div class="card">
+        <h2 style="margin-top: 0;">Settings</h2>
+        <p>Khu vực cấu hình và quản lý dữ liệu hệ thống.</p>
+        
+        <hr style="border: 0; border-top: 1px solid var(--border); margin: 24px 0;" />
+        
+        <h3 style="color: var(--danger);">Danger Zone</h3>
+        <p style="font-size: 14px; color: var(--muted); margin-bottom: 16px;">
+          Nút bên dưới sẽ tải về bản sao lưu (ZIP) toàn bộ file khách hàng đã upload, sau khi tải thành công về thiết bị của bạn, hệ thống mới tiến hành <strong>xóa toàn bộ file và dữ liệu</strong> trên server.
+        </p>
+        
+        <button id="resetBtn" class="btn-danger">Reset All User Data</button>
+        
+        <div id="statusMsg" class="message"></div>
+      </div>
+    </main>
+
+    <script>
+      const resetBtn = document.getElementById('resetBtn');
+      const statusMsg = document.getElementById('statusMsg');
+
+      function showMsg(text, type) {
+        statusMsg.textContent = text;
+        statusMsg.className = 'message msg-' + type;
+        statusMsg.style.display = 'block';
+      }
+
+      resetBtn.addEventListener('click', async () => {
+        if (!confirm("Bạn có chắc chắn muốn Reset All User Data? Quá trình này sẽ tải file backup và sau đó XÓA TOÀN BỘ dữ liệu trên server.")) return;
+        
+        resetBtn.disabled = true;
+        showMsg("Đang nén dữ liệu và tải file backup... Vui lòng chờ tải xong.", "info");
+
+        try {
+          // 1. Tải file ZIP bằng fetch để đảm bảo file về tới máy client
+          const backupRes = await fetch('/admin/settings/backup-for-reset', { method: 'POST' });
+          if (!backupRes.ok) throw new Error("Lỗi khi tạo file backup từ server.");
+          
+          const blob = await backupRes.blob();
+          
+          // Tạo link download
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          
+          let filename = 'backup.zip';
+          const disposition = backupRes.headers.get('Content-Disposition');
+          if (disposition && disposition.includes('filename=')) {
+            filename = disposition.split('filename=')[1].replace(/"/g, '');
+          }
+          a.download = filename;
+          document.body.appendChild(a);
+          a.click();
+          window.URL.revokeObjectURL(url);
+          document.body.removeChild(a);
+
+          showMsg("Tải backup thành công! Đang tiến hành xóa dữ liệu trên server...", "info");
+
+          // 2. Gọi API xóa file sau khi tải xong
+          const deleteRes = await fetch('/admin/settings/delete-all-uploads', { method: 'POST' });
+          if (!deleteRes.ok) throw new Error("Lỗi khi xóa dữ liệu trên server.");
+
+          showMsg("Hoàn tất! Đã tải backup và xóa toàn bộ dữ liệu.", "success");
+          
+        } catch (error) {
+          showMsg("QUÁ TRÌNH BỊ HỦY: " + error.message, "error");
+          resetBtn.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>

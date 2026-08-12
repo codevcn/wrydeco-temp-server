@@ -957,5 +957,49 @@ def download_backup(filename: str = Query(...)) -> FileResponse:
     )
 
 
+@app.get("/admin/settings", response_class=HTMLResponse, include_in_schema=False)
+def view_settings_page(request: Request) -> HTMLResponse:
+    return templates.TemplateResponse(
+        "settings.html",
+        {
+            "request": request,
+        },
+    )
+
+@app.post("/admin/settings/backup-for-reset", include_in_schema=False)
+def backup_for_reset() -> FileResponse:
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+    zip_filename = f"full_backup_{timestamp}"
+    zip_filepath = BACKUP_COMPRESS_DIR / zip_filename
+    shutil.make_archive(str(zip_filepath), 'zip', str(UPLOAD_DIR))
+    return FileResponse(
+        path=zip_filepath.with_suffix('.zip'),
+        media_type="application/zip",
+        headers={"Content-Disposition": f"attachment; filename=\"{zip_filename}.zip\""}
+    )
+
+@app.post("/admin/settings/delete-all-uploads", include_in_schema=False)
+def delete_all_uploads(db: Session = Depends(get_db)):
+    # Delete all files and folders inside UPLOAD_DIR
+    if UPLOAD_DIR.exists():
+        for item in UPLOAD_DIR.iterdir():
+            if item.is_file():
+                item.unlink()
+            elif item.is_dir():
+                shutil.rmtree(item)
+    
+    # Recreate subdirectories that are statically defined
+    IMAGE_UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+    VIDEO_UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+
+    # Clear DB tables
+    db.query(ConsultationFile).delete()
+    db.query(ConsultationEntry).delete()
+    db.query(CustomSizeRequest).delete()
+    db.commit()
+
+    return {"success": True}
+
+
 # Mount static files (favicons, etc.) at root path, placed at the end so it doesn't override API routes.
 app.mount("/", StaticFiles(directory=str(STATIC_DIR)), name="static")
