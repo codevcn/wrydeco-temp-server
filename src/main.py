@@ -2,6 +2,7 @@
 
 import hashlib
 import mimetypes
+import os
 import re
 import shutil
 import uuid
@@ -27,7 +28,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 from starlette.datastructures import UploadFile as StarletteUploadFile
-from .config import STATIC_DIR, TEMPLATES_DIR, UPLOAD_DIR, BACKUP_COMPRESS_DIR
+from .config import STATIC_DIR, TEMPLATES_DIR, UPLOAD_DIR, BACKUP_COMPRESS_DIR, BASE_DIR
 from .database import ConsultationEntry, ConsultationFile, CustomSizeRequest, get_db, init_db
 
 app = FastAPI(
@@ -654,19 +655,30 @@ def export_uploads() -> FileResponse:
     Lưu tại thư mục backup/compress theo yêu cầu.
     """
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
-    zip_filename = f"uploads_backup_{timestamp}"
+    zip_filename = f"uploads_backup_{timestamp}.zip"
     zip_filepath = BACKUP_COMPRESS_DIR / zip_filename
     
-    # shutil.make_archive adds the .zip extension automatically
-    shutil.make_archive(str(zip_filepath), 'zip', str(UPLOAD_DIR))
-    
-    final_zip_path = zip_filepath.with_suffix('.zip')
+    with zipfile.ZipFile(zip_filepath, 'w', zipfile.ZIP_DEFLATED) as zipf:
+        if UPLOAD_DIR.exists():
+            for root, dirs, files in os.walk(UPLOAD_DIR):
+                for file in files:
+                    file_path = Path(root) / file
+                    arcname = file_path.relative_to(BASE_DIR)
+                    zipf.write(file_path, arcname)
+        
+        data_dir = BASE_DIR / "data"
+        if data_dir.exists():
+            for root, dirs, files in os.walk(data_dir):
+                for file in files:
+                    file_path = Path(root) / file
+                    arcname = file_path.relative_to(BASE_DIR)
+                    zipf.write(file_path, arcname)
     
     return FileResponse(
-        path=final_zip_path,
+        path=zip_filepath,
         media_type="application/zip",
         headers={
-            "Content-Disposition": f"attachment; filename=\"{zip_filename}.zip\""
+            "Content-Disposition": f"attachment; filename=\"{zip_filename}\""
         }
     )
 
@@ -970,13 +982,29 @@ def view_settings_page(request: Request) -> HTMLResponse:
 @app.post("/admin/settings/backup-for-reset", include_in_schema=False)
 def backup_for_reset() -> FileResponse:
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
-    zip_filename = f"full_backup_{timestamp}"
+    zip_filename = f"full_backup_{timestamp}.zip"
     zip_filepath = BACKUP_COMPRESS_DIR / zip_filename
-    shutil.make_archive(str(zip_filepath), 'zip', str(UPLOAD_DIR))
+    
+    with zipfile.ZipFile(zip_filepath, 'w', zipfile.ZIP_DEFLATED) as zipf:
+        if UPLOAD_DIR.exists():
+            for root, dirs, files in os.walk(UPLOAD_DIR):
+                for file in files:
+                    file_path = Path(root) / file
+                    arcname = file_path.relative_to(BASE_DIR)
+                    zipf.write(file_path, arcname)
+        
+        data_dir = BASE_DIR / "data"
+        if data_dir.exists():
+            for root, dirs, files in os.walk(data_dir):
+                for file in files:
+                    file_path = Path(root) / file
+                    arcname = file_path.relative_to(BASE_DIR)
+                    zipf.write(file_path, arcname)
+    
     return FileResponse(
-        path=zip_filepath.with_suffix('.zip'),
+        path=zip_filepath,
         media_type="application/zip",
-        headers={"Content-Disposition": f"attachment; filename=\"{zip_filename}.zip\""}
+        headers={"Content-Disposition": f"attachment; filename=\"{zip_filename}\""}
     )
 
 @app.post("/admin/settings/delete-all-uploads", include_in_schema=False)
@@ -1012,9 +1040,14 @@ async def restore_uploads(file: UploadFile = File(...)):
         content = await file.read()
         temp_zip_path.write_bytes(content)
 
-        # Extract it into UPLOAD_DIR
+        # Extract it
         with zipfile.ZipFile(temp_zip_path, 'r') as zip_ref:
-            zip_ref.extractall(UPLOAD_DIR)
+            namelist = zip_ref.namelist()
+            is_new_format = any(name.startswith('uploads/') or name.startswith('data/') or name.startswith('uploads\\') or name.startswith('data\\') for name in namelist)
+            if is_new_format:
+                zip_ref.extractall(BASE_DIR)
+            else:
+                zip_ref.extractall(UPLOAD_DIR)
 
     except zipfile.BadZipFile:
         raise HTTPException(status_code=400, detail="The uploaded file is not a valid ZIP archive.")
