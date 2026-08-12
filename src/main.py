@@ -838,6 +838,10 @@ def view_uploads_page(request: Request, db: Session = Depends(get_db)) -> HTMLRe
             if folder == ".":
                 folder = "/"
 
+            tag = ""
+            if "--" in file_path.stem:
+                tag = file_path.stem.split("--")[-1]
+
             uploaded_files.append(
                 {
                     "display_name": original_name_by_stored_name.get(
@@ -851,6 +855,7 @@ def view_uploads_page(request: Request, db: Session = Depends(get_db)) -> HTMLRe
                     "size_bytes": stat.st_size,
                     "media_type": media_type,
                     "entry_id": entry_id_by_stored_name.get(file_path.name),
+                    "tag": tag,
                     "modified_at": datetime.fromtimestamp(
                         stat.st_mtime,
                         timezone.utc,
