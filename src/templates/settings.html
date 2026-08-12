@@ -37,7 +37,7 @@
         
         <h3 style="color: var(--accent);">Khôi phục Dữ liệu (Restore)</h3>
         <p style="font-size: 14px; color: var(--muted); margin-bottom: 16px;">
-          Tải lên file ZIP backup để khôi phục toàn bộ các file đã upload. File ZIP này sẽ được giải nén trực tiếp vào thư mục uploads trên server.
+          Tải lên file ZIP backup để khôi phục toàn bộ dữ liệu. File ZIP này chứa cơ sở dữ liệu và các file đã upload, sẽ được giải nén và ghi đè trực tiếp lên server.
         </p>
         
         <form id="restoreForm" style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
@@ -51,7 +51,7 @@
         
         <h3 style="color: var(--danger);">Danger Zone</h3>
         <p style="font-size: 14px; color: var(--muted); margin-bottom: 16px;">
-          Nút bên dưới sẽ tải về bản sao lưu (ZIP) toàn bộ file khách hàng đã upload, sau khi tải thành công về thiết bị của bạn, hệ thống mới tiến hành <strong>xóa toàn bộ file và dữ liệu</strong> trên server.
+          Nút bên dưới sẽ tải về bản sao lưu (ZIP) chứa cơ sở dữ liệu và toàn bộ file khách hàng đã upload. Sau khi tải thành công về thiết bị, hệ thống mới tiến hành <strong>xóa toàn bộ file và dữ liệu</strong> trên server.
         </p>
         
         <button id="resetBtn" class="btn-danger">Reset All User Data</button>
