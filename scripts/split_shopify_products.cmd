@@ -1,1 +1,0 @@
-python split_shopify_products.py "products_export(20260812-100458).csv"

@@ -1,5 +1,4 @@
 import os
-import subprocess
 import paramiko
 import sys
 
@@ -9,26 +8,46 @@ VPS_PASSWORD = 'F8_OwEyj_Cod'
 PROJECT_DIR = '/var/www/wrydeco-temp-server'
 SERVICE_NAME = 'wrydeco-temp-server'
 
-def run_local(command):
-    print(f"[LOCAL] Running: {command}")
-    result = subprocess.run(command, shell=True, text=True, capture_output=True)
-    if result.returncode != 0:
-        print(f"[LOCAL] Error:\n{result.stderr}")
-        sys.exit(1)
-    print(result.stdout)
+IGNORE_DIRS = {'.git', '__pycache__', '.venv', 'data', 'uploads', 'backup', '.playwright-mcp', 'node_modules'}
+
+def sync_files(sftp, local_dir, remote_dir):
+    for root, dirs, files in os.walk(local_dir):
+        # Bỏ qua các thư mục không cần thiết
+        dirs[:] = [d for d in dirs if d not in IGNORE_DIRS]
+        
+        for file in files:
+            # Bỏ qua file ẩn hoặc cấu hình không cần thiết nếu muốn, ở đây chỉ loại .gitignore cơ bản
+            if file in {'.gitignore', '.DS_Store'}:
+                continue
+                
+            local_path = os.path.join(root, file)
+            rel_path = os.path.relpath(local_path, local_dir)
+            # Dùng dấu / cho đường dẫn trên Linux
+            remote_path = f"{remote_dir}/{rel_path.replace(os.sep, '/')}"
+            
+            # Đảm bảo thư mục đích tồn tại
+            remote_dir_path = remote_path.rsplit('/', 1)[0]
+            try:
+                sftp.stat(remote_dir_path)
+            except IOError:
+                # Tạo thư mục theo từng cấp
+                parts = remote_dir_path.replace(remote_dir, '').strip('/').split('/')
+                current_dir = remote_dir
+                for part in parts:
+                    if part:
+                        current_dir = f"{current_dir}/{part}"
+                        try:
+                            sftp.stat(current_dir)
+                        except IOError:
+                            sftp.mkdir(current_dir)
+            
+            # Upload file
+            print(f"Uploading {rel_path} -> {remote_path}")
+            sftp.put(local_path, remote_path)
 
 def deploy():
-    print("=== BƯỚC 1: COMMIT & PUSH (LOCAL) ===")
-    run_local("git add .")
-    status = subprocess.run("git status --porcelain", shell=True, capture_output=True, text=True)
-    if status.stdout.strip():
-        run_local("git commit -m \"Auto deploy from Antigravity Agent: add Export Data ZIP feature\"")
-        run_local("git push origin main")
-    else:
-        print("Khong co thay doi de commit. Tiep tuc deploy.")
-    
-    print("\n=== BƯỚC 2: DEPLOY TRÊN VPS ===")
     sys.stdout.reconfigure(encoding='utf-8')
+    print("=== BƯỚC 1: KẾT NỐI VPS ===")
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     print(f"Connecting to {VPS_USER}@{VPS_IP}...")
@@ -38,10 +57,19 @@ def deploy():
         print(f"SSH error: {e}")
         sys.exit(1)
 
-    # Chạy các lệnh an toàn bằng sudo -S để truyền mật khẩu
+    print("\n=== BƯỚC 2: PHÂN QUYỀN THƯ MỤC TRÊN VPS ===")
+    chown_cmd = f"echo '{VPS_PASSWORD}' | sudo -S chown -R {VPS_USER}:{VPS_USER} {PROJECT_DIR}"
+    stdin, stdout, stderr = client.exec_command(chown_cmd)
+    stdout.channel.recv_exit_status() # Chờ lệnh thực thi xong
+    
+    print("\n=== BƯỚC 3: SYNC FILES LÊN VPS ===")
+    sftp = client.open_sftp()
+    local_dir = os.path.abspath(os.path.dirname(__file__))
+    sync_files(sftp, local_dir, PROJECT_DIR)
+    sftp.close()
+
+    print("\n=== BƯỚC 4: KHỞI ĐỘNG LẠI DỊCH VỤ TRÊN VPS ===")
     commands = [
-        f"echo '{VPS_PASSWORD}' | sudo -S chown -R {VPS_USER}:{VPS_USER} {PROJECT_DIR}",
-        f"cd {PROJECT_DIR} && git pull origin main",
         f"cd {PROJECT_DIR} && source .venv/bin/activate && pip install -r requirements.txt",
         f"echo '{VPS_PASSWORD}' | sudo -S systemctl restart {SERVICE_NAME}",
         f"systemctl status {SERVICE_NAME} --no-pager"
@@ -50,7 +78,6 @@ def deploy():
     for cmd in commands:
         print(f"\n[VPS] Running: {cmd}")
         stdin, stdout, stderr = client.exec_command(cmd)
-        # Read outputs
         out = stdout.read().decode('utf-8', 'replace').encode('ascii', 'replace').decode('ascii')
         err = stderr.read().decode('utf-8', 'replace').encode('ascii', 'replace').decode('ascii')
         if out.strip(): print(out.strip())

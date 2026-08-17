@@ -273,6 +273,25 @@
       .copy-btn:hover {
         text-decoration: underline;
       }
+      
+      .delete-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-size: 12px;
+        background: #fff5f5;
+        color: #c53030;
+        border: 1px solid #fed7d7;
+        cursor: pointer;
+        text-decoration: none;
+        margin-left: 8px;
+      }
+      .delete-btn:hover {
+        text-decoration: underline;
+        background: #fed7d7;
+      }
     </style>
   </head>
 
@@ -285,7 +304,7 @@
         
         <form id="uploadForm">
           <div class="form-group">
-            <label>Chọn video từ thiết bị (mp4, webm, mov - Tối đa 100MB)</label>
+            <label>Chọn video từ thiết bị (mp4, webm, mov - Không giới hạn dung lượng)</label>
             <div class="file-input-wrapper">
               <button type="button" class="btn">Chọn File Video</button>
               <input type="file" id="videoInput" accept="video/mp4, video/webm, video/quicktime" />
@@ -311,8 +330,8 @@
 
       <div class="upload-card" style="margin-top: 24px;">
         <h2>Danh sách Video đã tải lên</h2>
-        <div class="table-wrap">
-          {% if uploaded_videos %}
+        <p style="margin-top: -12px; margin-bottom: 20px; font-size: 13px; color: var(--muted);">Các file tải lên mới nhất sẽ nằm trên cùng danh sách</p>
+        <div class="table-wrap" style="margin-top: 0;">          {% if uploaded_videos %}
           <table>
             <thead>
               <tr>
@@ -331,6 +350,7 @@
                 <td class="url-cell" title="{{ v.url }}"><a href="{{ v.url }}" target="_blank">{{ v.url }}</a></td>
                 <td>
                   <button type="button" class="copy-btn" onclick="navigator.clipboard.writeText('{{ v.url }}'); alert('Đã copy URL!');">Copy URL</button>
+                  <button type="button" class="delete-btn" onclick="deleteVideo('{{ v.name }}')">Xóa</button>
                 </td>
                 <td class="muted">{{ v.created_at }}</td>
               </tr>
@@ -359,14 +379,6 @@
         if (file) {
           fileNameDisplay.textContent = file.name + ' (' + (file.size / (1024 * 1024)).toFixed(2) + ' MB)';
           
-          // Check limit (100MB)
-          if (file.size > 100 * 1024 * 1024) {
-            showStatus('File quá lớn. Dung lượng tối đa là 100MB.', 'error');
-            submitBtn.disabled = true;
-            previewSection.style.display = 'none';
-            return;
-          }
-
           // Create object URL for preview
           const fileURL = URL.createObjectURL(file);
           videoPreview.src = fileURL;
@@ -429,6 +441,25 @@
 
       function hideStatus() {
         statusMessage.style.display = 'none';
+      }
+
+      async function deleteVideo(filename) {
+        if (!confirm('Bạn có chắc chắn muốn xóa video này? Hành động này không thể hoàn tác.')) return;
+        
+        try {
+          const res = await fetch('/api/delete-video/' + encodeURIComponent(filename), {
+            method: 'DELETE'
+          });
+          
+          if (res.ok) {
+            window.location.reload();
+          } else {
+            const data = await res.json();
+            alert('Lỗi: ' + (data.detail || data.message || 'Không thể xóa'));
+          }
+        } catch (err) {
+          alert('Lỗi kết nối: ' + err.message);
+        }
       }
     </script>
   </body>

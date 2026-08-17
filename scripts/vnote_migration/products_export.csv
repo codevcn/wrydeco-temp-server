@@ -1,0 +1,403 @@
+Handle,Title,Body (HTML),Vendor,Product Category,Type,Tags,Published,Option1 Name,Option1 Value,Option1 Linked To,Option2 Name,Option2 Value,Option2 Linked To,Option3 Name,Option3 Value,Option3 Linked To,Variant SKU,Variant Grams,Variant Inventory Tracker,Variant Inventory Qty,Variant Inventory Policy,Variant Fulfillment Service,Variant Price,Variant Compare At Price,Variant Requires Shipping,Variant Taxable,Unit Price Total Measure,Unit Price Total Measure Unit,Unit Price Base Measure,Unit Price Base Measure Unit,Variant Barcode,Image Src,Image Position,Image Alt Text,Gift Card,SEO Title,SEO Description,Amazon Link (product.metafields.custom.amazon_link),Author Info (product.metafields.custom.author_info),Bought Amount (product.metafields.custom.bought_amount),Product Material (product.metafields.custom.product_material),product_video_media (product.metafields.custom.product_video_media),Rich Description (product.metafields.custom.rich_description),SEO Product Title (product.metafields.custom.seo_product_title),Size Guide (product.metafields.custom.size_guide),Wood Type (product.metafields.custom.wood_type),Product rating count (product.metafields.reviews.rating_count),Color (product.metafields.shopify.color-pattern),Mounting type (product.metafields.shopify.mounting-type),Suitable location (product.metafields.shopify.suitable-location),Wood finish (product.metafields.shopify.wood-finish),Complementary products (product.metafields.shopify--discovery--product_recommendation.complementary_products),Related products (product.metafields.shopify--discovery--product_recommendation.related_products),Related products settings (product.metafields.shopify--discovery--product_recommendation.related_products_display),Search product boosts (product.metafields.shopify--discovery--product_search_boost.queries),Variant Image,Variant Weight Unit,Variant Tax Code,Cost per item,Status
+rustic-wooden-tree-bookshelf-with-branch-shelves-for-home,Rustic Wooden Tree Bookshelf with Branch Shelves for Home,"<div class=""dm-tabs__rte"" style=""margin:0; padding:0; background:transparent; color:#2a211b; font-family:inherit;"">
+  <div style=""display:grid; gap:16px; margin:0; padding:0; background:transparent;"">
+    <div style=""padding:16px 18px; border-radius:16px; background:rgba(91,50,24,0.055); border:1px solid rgba(92,58,35,0.10);"">
+      <div style=""margin:0 0 6px; color:#5a3218; font-size:11px; line-height:1; font-weight:600; letter-spacing:0.16em; text-transform:uppercase;"">
+        Sculptural Tree-Inspired Storage
+      </div>
+      <p style=""margin:0; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">
+        A striking wooden bookcase shaped like a natural tree trunk with branch-style shelves, bringing warmth, movement, and artistic character to your living room, entryway, bedroom, or reading corner.
+      </p>
+    </div>
+    <div style=""display:grid; grid-template-columns:34px 1fr; gap:14px; padding:0 0 16px; border-bottom:1px solid rgba(92,58,35,0.14); background:transparent;"">
+      <span style=""width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; background:rgba(91,50,24,0.09); color:#5a3218; font-size:11px; font-weight:600; letter-spacing:0.04em; line-height:1;"">
+        01
+      </span>
+      <div style=""margin:0; padding:0; background:transparent;"">
+        <h3 style=""margin:0 0 7px; padding:0; color:#1f1712; font-family:var(--font-heading-family, Georgia, serif); font-size:17px; line-height:1.35; font-weight:500;"">
+          Multiple Open Shelves for Display
+        </h3>
+        <p style=""margin:0; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">
+          Designed to hold books, small plants, vases, candles, framed photos, keepsakes, decorative bowls, and collected treasures while turning everyday storage into beautiful wall decor.
+        </p>
+      </div>
+    </div>
+    <div style=""display:grid; grid-template-columns:34px 1fr; gap:14px; padding:0 0 16px; border-bottom:1px solid rgba(92,58,35,0.14); background:transparent;"">
+      <span style=""width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; background:rgba(91,50,24,0.09); color:#5a3218; font-size:11px; font-weight:600; letter-spacing:0.04em; line-height:1;"">
+        02
+      </span>
+      <div style=""margin:0; padding:0; background:transparent;"">
+        <h3 style=""margin:0 0 7px; padding:0; color:#1f1712; font-family:var(--font-heading-family, Georgia, serif); font-size:17px; line-height:1.35; font-weight:500;"">
+          Natural Wood Grain with Rustic Charm
+        </h3>
+        <p style=""margin:0; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">
+          The warm wood tone, visible grain, knots, textured trunk details, and organic branch forms create a handcrafted look that feels earthy, cozy, and one of a kind.
+        </p>
+      </div>
+    </div>
+    <div style=""display:grid; grid-template-columns:34px 1fr; gap:14px; padding:0 0 16px; border-bottom:1px solid rgba(92,58,35,0.14); background:transparent;"">
+      <span style=""width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; background:rgba(91,50,24,0.09); color:#5a3218; font-size:11px; font-weight:600; letter-spacing:0.04em; line-height:1;"">
+        03
+      </span>
+      <div style=""margin:0; padding:0; background:transparent;"">
+        <h3 style=""margin:0 0 7px; padding:0; color:#1f1712; font-family:var(--font-heading-family, Georgia, serif); font-size:17px; line-height:1.35; font-weight:500;"">
+          Statement Piece for Home Styling
+        </h3>
+        <p style=""margin:0 0 10px; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">
+          Perfect for boho, farmhouse, rustic modern, organic modern, woodland, cabin, cottage, Mediterranean, vintage-inspired, and nature-inspired interiors.
+        </p>
+        <div style=""display:flex; flex-wrap:wrap; gap:7px; margin:0; padding:0;"">
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.06); border:1px solid rgba(92,58,35,0.10); color:rgba(42,33,27,0.78); font-size:12px; line-height:1;"">Boho</span>
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.06); border:1px solid rgba(92,58,35,0.10); color:rgba(42,33,27,0.78); font-size:12px; line-height:1;"">Farmhouse</span>
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.06); border:1px solid rgba(92,58,35,0.10); color:rgba(42,33,27,0.78); font-size:12px; line-height:1;"">Rustic Modern</span>
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.06); border:1px solid rgba(92,58,35,0.10); color:rgba(42,33,27,0.78); font-size:12px; line-height:1;"">Woodland</span>
+        </div>
+      </div>
+    </div>
+    <div style=""display:grid; grid-template-columns:34px 1fr; gap:14px; padding:0 0 16px; border-bottom:1px solid rgba(92,58,35,0.14); background:transparent;"">
+      <span style=""width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; background:rgba(91,50,24,0.09); color:#5a3218; font-size:11px; font-weight:600; letter-spacing:0.04em; line-height:1;"">
+        04
+      </span>
+      <div style=""margin:0; padding:0; background:transparent;"">
+        <h3 style=""margin:0 0 7px; padding:0; color:#1f1712; font-family:var(--font-heading-family, Georgia, serif); font-size:17px; line-height:1.35; font-weight:500;"">
+          Functional Storage with Artistic Appeal
+        </h3>
+        <p style=""margin:0; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">
+          This tree bookcase adds vertical storage without looking bulky, making it ideal for styling blank walls, cozy corners, reading spaces, entryways, and living room focal points.
+        </p>
+      </div>
+    </div>
+    <div style=""display:grid; grid-template-columns:34px 1fr; gap:14px; padding:0 0 16px; border-bottom:1px solid rgba(92,58,35,0.14); background:transparent;"">
+      <span style=""width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; background:rgba(91,50,24,0.09); color:#5a3218; font-size:11px; font-weight:600; letter-spacing:0.04em; line-height:1;"">
+        05
+      </span>
+      <div style=""margin:0; padding:0; background:transparent;"">
+        <h3 style=""margin:0 0 7px; padding:0; color:#1f1712; font-family:var(--font-heading-family, Georgia, serif); font-size:17px; line-height:1.35; font-weight:500;"">
+          Meaningful Gift or Home Upgrade
+        </h3>
+        <p style=""margin:0; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">
+          A thoughtful choice for housewarming gifts, new homes, apartment makeovers, reading room refreshes, nursery upgrades, or anyone who loves unique wooden furniture with natural design value.
+        </p>
+      </div>
+    </div>
+    <div style=""display:grid; grid-template-columns:34px 1fr; gap:14px; padding:0 0 16px; border-bottom:1px solid rgba(92,58,35,0.14); background:transparent;"">
+      <span style=""width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; background:rgba(91,50,24,0.09); color:#5a3218; font-size:11px; font-weight:600; letter-spacing:0.04em; line-height:1;"">
+        06
+      </span>
+      <div style=""margin:0; padding:0; background:transparent;"">
+        <h3 style=""margin:0 0 7px; padding:0; color:#1f1712; font-family:var(--font-heading-family, Georgia, serif); font-size:17px; line-height:1.35; font-weight:500;"">
+          Carefully Packed for Delivery
+        </h3>
+        <p style=""margin:0; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">
+          Each bookshelf is prepared with protective packing to help safeguard the trunk body, branch supports, shelf surfaces, wood texture, and decorative details during shipping.
+        </p>
+      </div>
+    </div>
+    <div style=""margin:2px 0 0; padding:13px 15px; border-radius:14px; background:rgba(91,50,24,0.06); color:rgba(42,33,27,0.72); font-size:13px; line-height:1.6; border:1px solid rgba(92,58,35,0.08);"">
+      Books, plants, pottery, lanterns, framed photos, baskets, and other decorative objects shown in product photos are for presentation only unless explicitly included.
+    </div>
+  </div>
+</div>",Wrydeco,Furniture > Shelving > Bookcases & Standing Shelves,standing-bookshelf,"rich_desc, source_amazon, vnote",true,Size,"50""W x 45""H x 8""D",,Wood Finish,Natural,,,,,,0.0,,0,continue,manual,3906.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8373267333177-gallery-001-logo-16af3c6bfacd_1abc46b8-ebe9-40db-ae31-fb6c94dd1a8a.jpg?v=1786634779,1,"",false,Rustic Tree Bookshelf with Branch Shelves - Buy Now,"Add nature-inspired charm to your home with our Rustic Tree Bookshelf. Features branch shelves perfect for displaying books, plants, and decor in any room.",https://www.amazon.com/dp/B0H4LS94TH,son-tran,,wood,,"<div class=""description-root""><img alt=""1"" src=""https://via.placeholder.com/800"" class=""a-spacing-base"" data-src=""https://vnote.io.vn/uploads/images/808039d0a47b455baeb3bd96b11c3a0c--Tree-Bookshelf-with-Branch-Shelves-Wooden-Standing-Bookcase-for-Living-Room-Entryway-Bedroom-Boho-Rustic-Home-Decor-rich-001.jpg""> <img alt=""1"" src=""https://via.placeholder.com/800"" class=""a-spacing-base"" data-src=""https://vnote.io.vn/uploads/images/8ccaf049884d477aa35e7d871944638d--Tree-Bookshelf-with-Branch-Shelves-Wooden-Standing-Bookcase-for-Living-Room-Entryway-Bedroom-Boho-Rustic-Home-Decor-rich-002.jpg""> <img alt=""1"" src=""https://via.placeholder.com/800"" class=""a-spacing-base"" data-src=""https://vnote.io.vn/uploads/images/73ee763946b34a74b74937ca1fa46992--Tree-Bookshelf-with-Branch-Shelves-Wooden-Standing-Bookcase-for-Living-Room-Entryway-Bedroom-Boho-Rustic-Home-Decor-rich-003.jpg""> <img alt=""1"" src=""https://via.placeholder.com/800"" class=""a-spacing-base"" data-src=""https://vnote.io.vn/uploads/images/1bdd25c11aa248cd8a35e98c685e331b--Tree-Bookshelf-with-Branch-Shelves-Wooden-Standing-Bookcase-for-Living-Room-Entryway-Bedroom-Boho-Rustic-Home-Decor-rich-004.jpg""> <img alt=""1"" src=""https://via.placeholder.com/800"" class=""a-spacing-base"" data-src=""https://vnote.io.vn/uploads/images/867282473f544b1a8531d527eace006e--Tree-Bookshelf-with-Branch-Shelves-Wooden-Standing-Bookcase-for-Living-Room-Entryway-Bedroom-Boho-Rustic-Home-Decor-rich-005.jpg""> <img alt=""1"" src=""https://via.placeholder.com/800"" class=""a-spacing-base"" data-src=""https://vnote.io.vn/uploads/images/63a900d7ecf34988a8b4b122279e3bac--Tree-Bookshelf-with-Branch-Shelves-Wooden-Standing-Bookcase-for-Living-Room-Entryway-Bedroom-Boho-Rustic-Home-Decor-rich-006.jpg""></div>",Rustic Solid Wood Tree Branch Bookshelf for Living Room,,wood,,,,,,,,,,,kg,,,active
+rustic-wooden-tree-bookshelf-with-branch-shelves-for-home,,,,,,,,,"65""W x 60""H x 9""D",,,Natural,,,,,,0.0,,0,continue,manual,4426.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8373267333177-gallery-002-logo-d255a6407053_10ae93cb-7734-42a1-a995-a5aaa95a7d1d.jpg?v=1786634779,2,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+rustic-wooden-tree-bookshelf-with-branch-shelves-for-home,,,,,,,,,"75""W x 65""H x 10""D",,,Natural,,,,,,0.0,,0,continue,manual,4947.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8373267333177-gallery-003-logo-f3c46f69482c_203962c4-297c-4014-a1c8-abf468ff70fc.jpg?v=1786634779,3,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+rustic-wooden-tree-bookshelf-with-branch-shelves-for-home,,,,,,,,,"89""W x 80""H x 10-12""D",,,Natural,,,,,,0.0,,0,continue,manual,5468.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8373267333177-gallery-004-logo-d32174d0c60a_6eb6e12a-3f88-4b98-85a6-c20d5be720fd.jpg?v=1786634779,4,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+rustic-wooden-tree-bookshelf-with-branch-shelves-for-home,,,,,,,,,"50""W x 45""H x 8""D",,,Light Oak,,,,,,0.0,,0,continue,manual,3906.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8373267333177-gallery-005-logo-1be7922dada8_4ad40c80-8401-448a-85d6-1d5d4ab4f2f3.jpg?v=1786634779,5,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+rustic-wooden-tree-bookshelf-with-branch-shelves-for-home,,,,,,,,,"50""W x 45""H x 8""D",,,Walnut,,,,,,0.0,,0,continue,manual,3906.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8373267333177-gallery-006-logo-03628bc8591a_2f9f940d-bfae-403b-9182-5ee233b4618b.jpg?v=1786634779,6,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+rustic-wooden-tree-bookshelf-with-branch-shelves-for-home,,,,,,,,,"50""W x 45""H x 8""D",,,Dark Walnut,,,,,,0.0,,0,continue,manual,3906.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8373267333177-gallery-007-logo-69137410e2b5_f0afb60b-9786-4081-bfa6-53ccd51d6b09.jpg?v=1786634779,7,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+rustic-wooden-tree-bookshelf-with-branch-shelves-for-home,,,,,,,,,"50""W x 45""H x 8""D",,,Custom,,,,,,0.0,,0,continue,manual,3906.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8373267333177-gallery-008-logo-0e06bb098115_44a651d2-3592-4ce4-8a87-7c56ff99f10f.jpg?v=1786634779,8,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+rustic-wooden-tree-bookshelf-with-branch-shelves-for-home,,,,,,,,,"65""W x 60""H x 9""D",,,Light Oak,,,,,,0.0,,0,continue,manual,4426.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8373267333177-gallery-009-logo-7b25de75d0d5_8d196b39-1cff-48df-bc5a-48d22278f66f.jpg?v=1786634779,9,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+rustic-wooden-tree-bookshelf-with-branch-shelves-for-home,,,,,,,,,"65""W x 60""H x 9""D",,,Walnut,,,,,,0.0,,0,continue,manual,4426.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8373267333177-gallery-010-logo-2e49a8989da1_5c9b9cde-633f-4873-bccd-f257a8ab3303.jpg?v=1786634779,10,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+rustic-wooden-tree-bookshelf-with-branch-shelves-for-home,,,,,,,,,"65""W x 60""H x 9""D",,,Dark Walnut,,,,,,0.0,,0,continue,manual,4426.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+rustic-wooden-tree-bookshelf-with-branch-shelves-for-home,,,,,,,,,"65""W x 60""H x 9""D",,,Custom,,,,,,0.0,,0,continue,manual,4426.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+rustic-wooden-tree-bookshelf-with-branch-shelves-for-home,,,,,,,,,"75""W x 65""H x 10""D",,,Light Oak,,,,,,0.0,,0,continue,manual,4947.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+rustic-wooden-tree-bookshelf-with-branch-shelves-for-home,,,,,,,,,"75""W x 65""H x 10""D",,,Walnut,,,,,,0.0,,0,continue,manual,4947.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+rustic-wooden-tree-bookshelf-with-branch-shelves-for-home,,,,,,,,,"75""W x 65""H x 10""D",,,Dark Walnut,,,,,,0.0,,0,continue,manual,4947.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+rustic-wooden-tree-bookshelf-with-branch-shelves-for-home,,,,,,,,,"75""W x 65""H x 10""D",,,Custom,,,,,,0.0,,0,continue,manual,4947.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+rustic-wooden-tree-bookshelf-with-branch-shelves-for-home,,,,,,,,,"89""W x 80""H x 10-12""D",,,Light Oak,,,,,,0.0,,0,continue,manual,5468.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+rustic-wooden-tree-bookshelf-with-branch-shelves-for-home,,,,,,,,,"89""W x 80""H x 10-12""D",,,Walnut,,,,,,0.0,,0,continue,manual,5468.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+rustic-wooden-tree-bookshelf-with-branch-shelves-for-home,,,,,,,,,"89""W x 80""H x 10-12""D",,,Dark Walnut,,,,,,0.0,,0,continue,manual,5468.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+rustic-wooden-tree-bookshelf-with-branch-shelves-for-home,,,,,,,,,"89""W x 80""H x 10-12""D",,,Custom,,,,,,0.0,,0,continue,manual,5468.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+wooden-tree-branch-standing-bookshelf-and-bookcase,Wooden Tree Branch Standing Bookshelf and Bookcase,"
+<div class=""dm-tabs__rte"" style=""margin:0; padding:0; background:transparent; color:#2a211b; font-family:inherit;"">
+  <div style=""display:grid; gap:16px; margin:0; padding:0; background:transparent;"">
+    <div style=""padding:16px 18px; border-radius:16px; background:rgba(91,50,24,0.055); border:1px solid rgba(92,58,35,0.10);"">
+      <div style=""margin:0 0 6px; color:#5a3218; font-size:11px; line-height:1; font-weight:600; letter-spacing:0.16em; text-transform:uppercase;"">
+        Tree-Inspired Bookshelf
+      </div>
+      <p style=""margin:0; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">
+        A striking wooden bookcase shaped like a natural tree trunk with branch-style shelves, bringing warmth, movement, and artistic character to your living room, entryway, bedroom, or reading corner.
+      </p>
+    </div>
+    
+    <div style=""display:grid; grid-template-columns:34px 1fr; gap:14px; padding:0 0 16px; border-bottom:1px solid rgba(92,58,35,0.14); background:transparent;"">
+      <span style=""width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; background:rgba(91,50,24,0.09); color:#5a3218; font-size:11px; font-weight:600; letter-spacing:0.04em; line-height:1;"">01</span>
+      <div style=""margin:0; padding:0; background:transparent;"">
+        <h3 style=""margin:0 0 7px; padding:0; color:#1f1712; font-family:var(--font-heading-family, Georgia, serif); font-size:17px; line-height:1.35; font-weight:500;"">Multiple Open Shelves</h3>
+        <p style=""margin:0; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">Designed to hold books, small plants, vases, candles, framed photos, keepsakes, decorative bowls, and collected treasures while turning everyday storage into beautiful wall decor.</p>
+      </div>
+    </div>
+    
+    <div style=""display:grid; grid-template-columns:34px 1fr; gap:14px; padding:0 0 16px; border-bottom:1px solid rgba(92,58,35,0.14); background:transparent;"">
+      <span style=""width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; background:rgba(91,50,24,0.09); color:#5a3218; font-size:11px; font-weight:600; letter-spacing:0.04em; line-height:1;"">02</span>
+      <div style=""margin:0; padding:0; background:transparent;"">
+        <h3 style=""margin:0 0 7px; padding:0; color:#1f1712; font-family:var(--font-heading-family, Georgia, serif); font-size:17px; line-height:1.35; font-weight:500;"">Natural Wood Grain</h3>
+        <p style=""margin:0 0 10px; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">The warm wood tone, visible grain, knots, textured trunk details, and organic branch forms create a handcrafted look that feels earthy, cozy, and one of a kind.</p>
+      </div>
+    </div>
+    
+    <div style=""display:grid; grid-template-columns:34px 1fr; gap:14px; padding:0 0 16px; border-bottom:1px solid rgba(92,58,35,0.14); background:transparent;"">
+      <span style=""width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; background:rgba(91,50,24,0.09); color:#5a3218; font-size:11px; font-weight:600; letter-spacing:0.04em; line-height:1;"">03</span>
+      <div style=""margin:0; padding:0; background:transparent;"">
+        <h3 style=""margin:0 0 7px; padding:0; color:#1f1712; font-family:var(--font-heading-family, Georgia, serif); font-size:17px; line-height:1.35; font-weight:500;"">Statement Styling Piece</h3>
+        <p style=""margin:0 0 10px; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">Perfect for a variety of interior themes including boho, farmhouse, rustic modern, organic modern, woodland, cabin, cottage, Mediterranean, and vintage-inspired.</p>
+      </div>
+    </div>
+    
+    <div style=""display:grid; grid-template-columns:34px 1fr; gap:14px; padding:0 0 16px; border-bottom:1px solid rgba(92,58,35,0.14); background:transparent;"">
+      <span style=""width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; background:rgba(91,50,24,0.09); color:#5a3218; font-size:11px; font-weight:600; letter-spacing:0.04em; line-height:1;"">04</span>
+      <div style=""margin:0; padding:0; background:transparent;"">
+        <h3 style=""margin:0 0 7px; padding:0; color:#1f1712; font-family:var(--font-heading-family, Georgia, serif); font-size:17px; line-height:1.35; font-weight:500;"">Functional Storage</h3>
+        <p style=""margin:0; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">This tree bookcase adds vertical storage without looking bulky, making it ideal for styling blank walls, cozy corners, reading spaces, entryways, and living room focal points.</p>
+      </div>
+    </div>
+
+    <div style=""display:grid; grid-template-columns:34px 1fr; gap:14px; padding:0 0 16px; border-bottom:1px solid rgba(92,58,35,0.14); background:transparent;"">
+      <span style=""width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; background:rgba(91,50,24,0.09); color:#5a3218; font-size:11px; font-weight:600; letter-spacing:0.04em; line-height:1;"">05</span>
+      <div style=""margin:0; padding:0; background:transparent;"">
+        <h3 style=""margin:0 0 7px; padding:0; color:#1f1712; font-family:var(--font-heading-family, Georgia, serif); font-size:17px; line-height:1.35; font-weight:500;"">Meaningful Home Upgrade</h3>
+        <p style=""margin:0; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">A thoughtful choice for housewarming gifts, new homes, apartment makeovers, reading room refreshes, nursery upgrades, or anyone who loves unique wooden furniture.</p>
+      </div>
+    </div>
+    
+    <div style=""display:grid; grid-template-columns:34px 1fr; gap:14px; padding:0 0 16px; border-bottom:1px solid rgba(92,58,35,0.14); background:transparent;"">
+      <span style=""width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; background:rgba(91,50,24,0.09); color:#5a3218; font-size:11px; font-weight:600; letter-spacing:0.04em; line-height:1;"">06</span>
+      <div style=""margin:0; padding:0; background:transparent;"">
+        <h3 style=""margin:0 0 7px; padding:0; color:#1f1712; font-family:var(--font-heading-family, Georgia, serif); font-size:17px; line-height:1.35; font-weight:500;"">Carefully Packed</h3>
+        <p style=""margin:0; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">Each bookshelf is prepared with protective packing to help safeguard the trunk body, branch supports, shelf surfaces, wood texture, and decorative details during shipping.</p>
+      </div>
+    </div>
+    
+    <div style=""margin:2px 0 0; padding:13px 15px; border-radius:14px; background:rgba(91,50,24,0.06); color:rgba(42,33,27,0.72); font-size:13px; line-height:1.6; border:1px solid rgba(92,58,35,0.08);"">
+      Books, plants, pottery, lanterns, framed photos, baskets, and other decorative objects shown in product photos are for presentation only unless explicitly included.
+    </div>
+  </div>
+</div>
+",Wrydeco,Furniture > Shelving > Bookcases & Standing Shelves,standing-bookshelf,"rich_desc, source_amazon, vnote",true,Size,"50""W x 45""H x 8""D",,Wood Finish,Natural,,,,,,0.0,,0,continue,manual,3906.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331141177-gallery-001-logo-16af3c6bfacd_4ed13be0-77a5-4219-abf6-850c4e854d15.jpg?v=1786642381,1,"",false,Wooden Tree Branch Standing Bookshelf & Wall Bookcase,Add natural character to your home with this tree branch standing bookshelf. Perfect for displaying books and decor in a rustic or boho space.,https://www.amazon.com/dp/B0H4LS94TH?lv=shuf&channelId=500&plpRedirect=mhFallback,son-tran,,wood,,"<div class=""description-root""><img alt=""1"" src=""https://via.placeholder.com/800"" class=""a-spacing-base"" data-src=""https://vnote.io.vn/uploads/images/839cd27527f9494885469905fc590a25--Tree-Bookshelf-with-Branch-Shelves-Wooden-Standing-Bookcase-for-Living-Room-Entryway-Bedroom-Boho-Rustic-Home-Decor-rich-001.jpg""> <img alt=""1"" src=""https://via.placeholder.com/800"" class=""a-spacing-base"" data-src=""https://vnote.io.vn/uploads/images/2c1ac79935f04e20a1c1dde5c71262e5--Tree-Bookshelf-with-Branch-Shelves-Wooden-Standing-Bookcase-for-Living-Room-Entryway-Bedroom-Boho-Rustic-Home-Decor-rich-002.jpg""> <img alt=""1"" src=""https://via.placeholder.com/800"" class=""a-spacing-base"" data-src=""https://vnote.io.vn/uploads/images/3ebd0a184e49408c9b022a2f3539778a--Tree-Bookshelf-with-Branch-Shelves-Wooden-Standing-Bookcase-for-Living-Room-Entryway-Bedroom-Boho-Rustic-Home-Decor-rich-003.jpg""> <img alt=""1"" src=""https://via.placeholder.com/800"" class=""a-spacing-base"" data-src=""https://vnote.io.vn/uploads/images/88513ea3e3524a96bc16b1b3a42d3038--Tree-Bookshelf-with-Branch-Shelves-Wooden-Standing-Bookcase-for-Living-Room-Entryway-Bedroom-Boho-Rustic-Home-Decor-rich-004.jpg""> <img alt=""1"" src=""https://via.placeholder.com/800"" class=""a-spacing-base"" data-src=""https://vnote.io.vn/uploads/images/41ac93cfe4e34e0c96f91a72afb2588b--Tree-Bookshelf-with-Branch-Shelves-Wooden-Standing-Bookcase-for-Living-Room-Entryway-Bedroom-Boho-Rustic-Home-Decor-rich-005.jpg""> <img alt=""1"" src=""https://via.placeholder.com/800"" class=""a-spacing-base"" data-src=""https://vnote.io.vn/uploads/images/4d6edfebd04b43bb8be9aacd08466ccb--Tree-Bookshelf-with-Branch-Shelves-Wooden-Standing-Bookcase-for-Living-Room-Entryway-Bedroom-Boho-Rustic-Home-Decor-rich-006.jpg""></div>",Wooden Tree Branch Standing Bookshelf and Bookcase,,wood,,,,,,,,,,,kg,,,active
+wooden-tree-branch-standing-bookshelf-and-bookcase,,,,,,,,,"65""W x 60""H x 9""D",,,Natural,,,,,,0.0,,0,continue,manual,4426.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331141177-gallery-002-logo-d255a6407053_4d95a15b-dc69-42ff-8f86-663b086e1056.jpg?v=1786642381,2,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+wooden-tree-branch-standing-bookshelf-and-bookcase,,,,,,,,,"75""W x 65""H x 10""D",,,Natural,,,,,,0.0,,0,continue,manual,4947.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331141177-gallery-003-logo-f3c46f69482c_1917bb7a-14f8-491d-9e26-900eba6a26be.jpg?v=1786642381,3,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+wooden-tree-branch-standing-bookshelf-and-bookcase,,,,,,,,,"89""W x 80""H x 10-12""D",,,Natural,,,,,,0.0,,0,continue,manual,5468.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331141177-gallery-004-logo-d32174d0c60a_a5006a4d-6360-44c4-a12e-61c1038c4267.jpg?v=1786642381,4,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+wooden-tree-branch-standing-bookshelf-and-bookcase,,,,,,,,,"50""W x 45""H x 8""D",,,Light Oak,,,,,,0.0,,0,continue,manual,3906.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331141177-gallery-005-logo-1be7922dada8_cf04a5a0-074b-4660-bc0d-a020ec41c139.jpg?v=1786642381,5,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+wooden-tree-branch-standing-bookshelf-and-bookcase,,,,,,,,,"50""W x 45""H x 8""D",,,Walnut,,,,,,0.0,,0,continue,manual,3906.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331141177-gallery-006-logo-03628bc8591a_8e571cf2-0d62-488c-ba11-fb1d24ad5df5.jpg?v=1786642381,6,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+wooden-tree-branch-standing-bookshelf-and-bookcase,,,,,,,,,"50""W x 45""H x 8""D",,,Dark Walnut,,,,,,0.0,,0,continue,manual,3906.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331141177-gallery-007-logo-69137410e2b5_9dd80626-38df-4960-89ec-a716b0038663.jpg?v=1786642381,7,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+wooden-tree-branch-standing-bookshelf-and-bookcase,,,,,,,,,"50""W x 45""H x 8""D",,,Custom,,,,,,0.0,,0,continue,manual,3906.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331141177-gallery-008-logo-0e06bb098115_cc5bcbf1-0b28-4bfe-b71c-7ccbfaa7f3e2.jpg?v=1786642381,8,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+wooden-tree-branch-standing-bookshelf-and-bookcase,,,,,,,,,"65""W x 60""H x 9""D",,,Light Oak,,,,,,0.0,,0,continue,manual,4426.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331141177-gallery-009-logo-7b25de75d0d5_99b296c0-d489-43f6-81e9-01f08d79922a.jpg?v=1786642381,9,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+wooden-tree-branch-standing-bookshelf-and-bookcase,,,,,,,,,"65""W x 60""H x 9""D",,,Walnut,,,,,,0.0,,0,continue,manual,4426.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331141177-gallery-010-logo-2e49a8989da1_c0edbd0b-81c1-4a31-8733-30427ece9911.jpg?v=1786642381,10,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+wooden-tree-branch-standing-bookshelf-and-bookcase,,,,,,,,,"65""W x 60""H x 9""D",,,Dark Walnut,,,,,,0.0,,0,continue,manual,4426.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+wooden-tree-branch-standing-bookshelf-and-bookcase,,,,,,,,,"65""W x 60""H x 9""D",,,Custom,,,,,,0.0,,0,continue,manual,4426.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+wooden-tree-branch-standing-bookshelf-and-bookcase,,,,,,,,,"75""W x 65""H x 10""D",,,Light Oak,,,,,,0.0,,0,continue,manual,4947.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+wooden-tree-branch-standing-bookshelf-and-bookcase,,,,,,,,,"75""W x 65""H x 10""D",,,Walnut,,,,,,0.0,,0,continue,manual,4947.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+wooden-tree-branch-standing-bookshelf-and-bookcase,,,,,,,,,"75""W x 65""H x 10""D",,,Dark Walnut,,,,,,0.0,,0,continue,manual,4947.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+wooden-tree-branch-standing-bookshelf-and-bookcase,,,,,,,,,"75""W x 65""H x 10""D",,,Custom,,,,,,0.0,,0,continue,manual,4947.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+wooden-tree-branch-standing-bookshelf-and-bookcase,,,,,,,,,"89""W x 80""H x 10-12""D",,,Light Oak,,,,,,0.0,,0,continue,manual,5468.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+wooden-tree-branch-standing-bookshelf-and-bookcase,,,,,,,,,"89""W x 80""H x 10-12""D",,,Walnut,,,,,,0.0,,0,continue,manual,5468.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+wooden-tree-branch-standing-bookshelf-and-bookcase,,,,,,,,,"89""W x 80""H x 10-12""D",,,Dark Walnut,,,,,,0.0,,0,continue,manual,5468.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+wooden-tree-branch-standing-bookshelf-and-bookcase,,,,,,,,,"89""W x 80""H x 10-12""D",,,Custom,,,,,,0.0,,0,continue,manual,5468.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+artistic-solid-wood-curved-bookcase-display-shelf,Artistic Solid Wood Curved Bookcase Freestanding Display Shelf,"
+<div class=""dm-tabs__rte"" style=""margin:0; padding:0; background:transparent; color:#2a211b; font-family:inherit;"">
+  <div style=""display:grid; gap:16px; margin:0; padding:0; background:transparent;"">
+    <div style=""padding:16px 18px; border-radius:16px; background:rgba(91,50,24,0.055); border:1px solid rgba(92,58,35,0.10);"">
+      <div style=""margin:0 0 6px; color:#5a3218; font-size:11px; line-height:1; font-weight:600; letter-spacing:0.16em; text-transform:uppercase;"">
+        Sculptural Statement Bookshelf
+      </div>
+      <p style=""margin:0; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">
+        Add functional art to your home with this artistic wooden bookshelf, designed with flowing curved supports and a bold organic silhouette that instantly elevates any space.
+      </p>
+    </div>
+    
+    <div style=""display:grid; grid-template-columns:34px 1fr; gap:14px; padding:0 0 16px; border-bottom:1px solid rgba(92,58,35,0.14); background:transparent;"">
+      <span style=""width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; background:rgba(91,50,24,0.09); color:#5a3218; font-size:11px; font-weight:600; letter-spacing:0.04em; line-height:1;"">01</span>
+      <div style=""margin:0; padding:0; background:transparent;"">
+        <h3 style=""margin:0 0 7px; padding:0; color:#1f1712; font-family:var(--font-heading-family, Georgia, serif); font-size:17px; line-height:1.35; font-weight:500;"">Solid Wood Beauty &amp; Texture</h3>
+        <p style=""margin:0; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">Crafted with a rich solid wood look, visible grain detail, smooth rounded edges, and a substantial freestanding structure, this bookcase brings warmth and handcrafted character to any interior.</p>
+      </div>
+    </div>
+    
+    <div style=""display:grid; grid-template-columns:34px 1fr; gap:14px; padding:0 0 16px; border-bottom:1px solid rgba(92,58,35,0.14); background:transparent;"">
+      <span style=""width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; background:rgba(91,50,24,0.09); color:#5a3218; font-size:11px; font-weight:600; letter-spacing:0.04em; line-height:1;"">02</span>
+      <div style=""margin:0; padding:0; background:transparent;"">
+        <h3 style=""margin:0 0 7px; padding:0; color:#1f1712; font-family:var(--font-heading-family, Georgia, serif); font-size:17px; line-height:1.35; font-weight:500;"">Open Storage for Books &amp; Decor</h3>
+        <p style=""margin:0 0 10px; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">Multiple shelf levels provide space for keeping your room organized, stylish, and easy to refresh seasonally.</p>
+        <div style=""display:flex; flex-wrap:wrap; gap:7px; margin:0; padding:0;"">
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.06); border:1px solid rgba(92,58,35,0.10); color:rgba(42,33,27,0.78); font-size:12px; line-height:1;"">Books</span>
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.06); border:1px solid rgba(92,58,35,0.10); color:rgba(42,33,27,0.78); font-size:12px; line-height:1;"">Plants</span>
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.06); border:1px solid rgba(92,58,35,0.10); color:rgba(42,33,27,0.78); font-size:12px; line-height:1;"">Vases</span>
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.06); border:1px solid rgba(92,58,35,0.10); color:rgba(42,33,27,0.78); font-size:12px; line-height:1;"">Framed Photos</span>
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.06); border:1px solid rgba(92,58,35,0.10); color:rgba(42,33,27,0.78); font-size:12px; line-height:1;"">Candles</span>
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.06); border:1px solid rgba(92,58,35,0.10); color:rgba(42,33,27,0.78); font-size:12px; line-height:1;"">Baskets</span>
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.09); border:1px solid rgba(92,58,35,0.13); color:#5a3218; font-size:12px; line-height:1;"">Collectibles</span>
+        </div>
+      </div>
+    </div>
+    
+    <div style=""display:grid; grid-template-columns:34px 1fr; gap:14px; padding:0 0 16px; border-bottom:1px solid rgba(92,58,35,0.14); background:transparent;"">
+      <span style=""width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; background:rgba(91,50,24,0.09); color:#5a3218; font-size:11px; font-weight:600; letter-spacing:0.04em; line-height:1;"">03</span>
+      <div style=""margin:0; padding:0; background:transparent;"">
+        <h3 style=""margin:0 0 7px; padding:0; color:#1f1712; font-family:var(--font-heading-family, Georgia, serif); font-size:17px; line-height:1.35; font-weight:500;"">Designed for Living Room Impact</h3>
+        <p style=""margin:0; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">More than a basic storage shelf, this curved display bookcase works beautifully as a room divider, accent furniture piece, reading corner shelf, or large living room storage solution.</p>
+      </div>
+    </div>
+    
+    <div style=""display:grid; grid-template-columns:34px 1fr; gap:14px; padding:0 0 16px; border-bottom:1px solid rgba(92,58,35,0.14); background:transparent;"">
+      <span style=""width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; background:rgba(91,50,24,0.09); color:#5a3218; font-size:11px; font-weight:600; letter-spacing:0.04em; line-height:1;"">04</span>
+      <div style=""margin:0; padding:0; background:transparent;"">
+        <h3 style=""margin:0 0 7px; padding:0; color:#1f1712; font-family:var(--font-heading-family, Georgia, serif); font-size:17px; line-height:1.35; font-weight:500;"">Multiple Size Options</h3>
+        <p style=""margin:0; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">Choose the best fit for your space with tall vertical designs that create generous display space without feeling like ordinary box shelving.</p>
+      </div>
+    </div>
+
+    <div style=""display:grid; grid-template-columns:34px 1fr; gap:14px; padding:0 0 16px; border-bottom:1px solid rgba(92,58,35,0.14); background:transparent;"">
+      <span style=""width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; background:rgba(91,50,24,0.09); color:#5a3218; font-size:11px; font-weight:600; letter-spacing:0.04em; line-height:1;"">05</span>
+      <div style=""margin:0; padding:0; background:transparent;"">
+        <h3 style=""margin:0 0 7px; padding:0; color:#1f1712; font-family:var(--font-heading-family, Georgia, serif); font-size:17px; line-height:1.35; font-weight:500;"">Finish Color Choices</h3>
+        <p style=""margin:0 0 10px; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">Available in various finishes, making it easy to match your bookshelf with existing flooring, sofas, tables, wall colors, and home decor themes.</p>
+        <div style=""display:flex; flex-wrap:wrap; gap:7px; margin:0; padding:0;"">
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.06); border:1px solid rgba(92,58,35,0.10); color:rgba(42,33,27,0.78); font-size:12px; line-height:1;"">Warm Wood</span>
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.06); border:1px solid rgba(92,58,35,0.10); color:rgba(42,33,27,0.78); font-size:12px; line-height:1;"">Dark Warm Wood</span>
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.06); border:1px solid rgba(92,58,35,0.10); color:rgba(42,33,27,0.78); font-size:12px; line-height:1;"">Cool Dark Wood</span>
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.09); border:1px solid rgba(92,58,35,0.13); color:#5a3218; font-size:12px; line-height:1;"">Natural Finish</span>
+        </div>
+      </div>
+    </div>
+    
+    <div style=""display:grid; grid-template-columns:34px 1fr; gap:14px; padding:0 0 16px; border-bottom:1px solid rgba(92,58,35,0.14); background:transparent;"">
+      <span style=""width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; background:rgba(91,50,24,0.09); color:#5a3218; font-size:11px; font-weight:600; letter-spacing:0.04em; line-height:1;"">06</span>
+      <div style=""margin:0; padding:0; background:transparent;"">
+        <h3 style=""margin:0 0 7px; padding:0; color:#1f1712; font-family:var(--font-heading-family, Georgia, serif); font-size:17px; line-height:1.35; font-weight:500;"">Memorable Gift for Home Lovers</h3>
+        <p style=""margin:0; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">A thoughtful gift idea for new homeowners, design lovers, book collectors, apartment decorators, office upgrades, housewarming celebrations, or weddings.</p>
+      </div>
+    </div>
+    
+    <div style=""margin:2px 0 0; padding:13px 15px; border-radius:14px; background:rgba(91,50,24,0.06); color:rgba(42,33,27,0.72); font-size:13px; line-height:1.6; border:1px solid rgba(92,58,35,0.08);"">
+      Books, plants, pottery, lanterns, framed photos, baskets, and other decorative objects shown in product photos are for presentation only unless explicitly included.
+    </div>
+  </div>
+</div>
+",Wrydeco,Furniture > Shelving > Bookcases & Standing Shelves,standing-bookshelf,"rich_desc, source_amazon, vnote",true,Size,"45""W x 45""H x 8""D",,Wood Finish,Natural,,,,,,0.0,,0,continue,manual,2343.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331403321-gallery-001-logo-2484befd5cd4_de9acdbb-84ca-4f73-8f1c-5645547e9fd8.jpg?v=1786640137,1,"",false,Artistic Solid Wood Curved Bookshelf & Display Unit,"Add functional art to your home with this artistic solid wood curved bookcase. Featuring open shelving, this freestanding display shelf elevates any room.",https://www.amazon.com/dp/B0H6FKDT2F,son-tran,,wood,,"<div class=""description-root""><img alt=""s"" src=""https://via.placeholder.com/800"" class=""a-spacing-base"" data-src=""https://vnote.io.vn/uploads/images/a81ebbd1bf0f472fb577aba5616f8338--Artistic-Wooden-Bookshelf-Solid-Wood-Curved-Bookcase-with-Open-Shelves-Freestanding-Display-Storage-for-Living-Room-Option-1-rich-001.jpg""> <img alt=""r"" src=""https://via.placeholder.com/800"" class=""a-spacing-base"" data-src=""https://vnote.io.vn/uploads/images/e31feddd2da44f2d976dd06ba3f6a2b5--Artistic-Wooden-Bookshelf-Solid-Wood-Curved-Bookcase-with-Open-Shelves-Freestanding-Display-Storage-for-Living-Room-Option-1-rich-002.jpg""> <img alt=""f"" src=""https://via.placeholder.com/800"" class=""a-spacing-base"" data-src=""https://vnote.io.vn/uploads/images/8f17368a18cf4a00b86407a34caec068--Artistic-Wooden-Bookshelf-Solid-Wood-Curved-Bookcase-with-Open-Shelves-Freestanding-Display-Storage-for-Living-Room-Option-1-rich-003.jpg""> <img alt=""f"" src=""https://via.placeholder.com/800"" class=""a-spacing-base"" data-src=""https://vnote.io.vn/uploads/images/8541a23780fc4e159cb3c760b2474d30--Artistic-Wooden-Bookshelf-Solid-Wood-Curved-Bookcase-with-Open-Shelves-Freestanding-Display-Storage-for-Living-Room-Option-1-rich-004.jpg""> <img alt=""x"" src=""https://via.placeholder.com/800"" class=""a-spacing-base"" data-src=""https://vnote.io.vn/uploads/images/ed5ded51bdcb413ea7f3d5013624a551--Artistic-Wooden-Bookshelf-Solid-Wood-Curved-Bookcase-with-Open-Shelves-Freestanding-Display-Storage-for-Living-Room-Option-1-rich-005.jpg""> <img alt=""g"" src=""https://via.placeholder.com/800"" class=""a-spacing-base"" data-src=""https://vnote.io.vn/uploads/images/69685fe0f9904a8a9d5c8c22ec741fbe--Artistic-Wooden-Bookshelf-Solid-Wood-Curved-Bookcase-with-Open-Shelves-Freestanding-Display-Storage-for-Living-Room-Option-1-rich-006.jpg""></div>",Artistic Solid Wood Curved Bookcase Freestanding Display Shelf,,wood,,,,,,,,,,,kg,,,active
+artistic-solid-wood-curved-bookcase-display-shelf,,,,,,,,,"59""W x 50""H x 9""D",,,Natural,,,,,,0.0,,0,continue,manual,2864.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331403321-gallery-002-logo-18d6c89ccf1e_a3370fec-cb18-4ffb-a47e-c128cfb0c72c.jpg?v=1786640137,2,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+artistic-solid-wood-curved-bookcase-display-shelf,,,,,,,,,"75""W x 65""H x 10""D",,,Natural,,,,,,0.0,,0,continue,manual,3385.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331403321-gallery-003-logo-24d8a29c7cfa_3cfb778d-95e4-4344-9d3b-a471c8e87c07.jpg?v=1786640137,3,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+artistic-solid-wood-curved-bookcase-display-shelf,,,,,,,,,"89""W x 80""H x 10-12""D",,,Natural,,,,,,0.0,,0,continue,manual,3906.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331403321-gallery-004-logo-2e49a8989da1_d06f3872-118e-4af7-8cce-5c862818819e.jpg?v=1786640137,4,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+artistic-solid-wood-curved-bookcase-display-shelf,,,,,,,,,"45""W x 45""H x 8""D",,,Light Oak,,,,,,0.0,,0,continue,manual,2343.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331403321-gallery-005-logo-1be7922dada8_8d158ffe-21da-412d-847a-0336711b4fd6.jpg?v=1786640137,5,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+artistic-solid-wood-curved-bookcase-display-shelf,,,,,,,,,"45""W x 45""H x 8""D",,,Walnut,,,,,,0.0,,0,continue,manual,2343.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331403321-gallery-006-logo-03628bc8591a_2e15bc8c-c90d-4090-98c6-d80501ec9cf3.jpg?v=1786640137,6,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+artistic-solid-wood-curved-bookcase-display-shelf,,,,,,,,,"45""W x 45""H x 8""D",,,Dark Walnut,,,,,,0.0,,0,continue,manual,2343.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331403321-gallery-007-logo-69137410e2b5_bff3c8c9-8eb6-47b6-9b04-48d28cc2796c.jpg?v=1786640137,7,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+artistic-solid-wood-curved-bookcase-display-shelf,,,,,,,,,"45""W x 45""H x 8""D",,,Custom,,,,,,0.0,,0,continue,manual,2343.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331403321-gallery-008-logo-5806feffaaf7_1eae4104-15b6-40c3-ab91-8acbea433504.jpg?v=1786640137,8,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+artistic-solid-wood-curved-bookcase-display-shelf,,,,,,,,,"59""W x 50""H x 9""D",,,Light Oak,,,,,,0.0,,0,continue,manual,2864.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+artistic-solid-wood-curved-bookcase-display-shelf,,,,,,,,,"59""W x 50""H x 9""D",,,Walnut,,,,,,0.0,,0,continue,manual,2864.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+artistic-solid-wood-curved-bookcase-display-shelf,,,,,,,,,"59""W x 50""H x 9""D",,,Dark Walnut,,,,,,0.0,,0,continue,manual,2864.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+artistic-solid-wood-curved-bookcase-display-shelf,,,,,,,,,"59""W x 50""H x 9""D",,,Custom,,,,,,0.0,,0,continue,manual,2864.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+artistic-solid-wood-curved-bookcase-display-shelf,,,,,,,,,"75""W x 65""H x 10""D",,,Light Oak,,,,,,0.0,,0,continue,manual,3385.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+artistic-solid-wood-curved-bookcase-display-shelf,,,,,,,,,"75""W x 65""H x 10""D",,,Walnut,,,,,,0.0,,0,continue,manual,3385.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+artistic-solid-wood-curved-bookcase-display-shelf,,,,,,,,,"75""W x 65""H x 10""D",,,Dark Walnut,,,,,,0.0,,0,continue,manual,3385.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+artistic-solid-wood-curved-bookcase-display-shelf,,,,,,,,,"75""W x 65""H x 10""D",,,Custom,,,,,,0.0,,0,continue,manual,3385.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+artistic-solid-wood-curved-bookcase-display-shelf,,,,,,,,,"89""W x 80""H x 10-12""D",,,Light Oak,,,,,,0.0,,0,continue,manual,3906.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+artistic-solid-wood-curved-bookcase-display-shelf,,,,,,,,,"89""W x 80""H x 10-12""D",,,Walnut,,,,,,0.0,,0,continue,manual,3906.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+artistic-solid-wood-curved-bookcase-display-shelf,,,,,,,,,"89""W x 80""H x 10-12""D",,,Dark Walnut,,,,,,0.0,,0,continue,manual,3906.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+artistic-solid-wood-curved-bookcase-display-shelf,,,,,,,,,"89""W x 80""H x 10-12""D",,,Custom,,,,,,0.0,,0,continue,manual,3906.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+modern-sculptural-curved-solid-wood-bookcase-shelf,Modern Sculptural Curved Solid Wood Bookcase Display Shelf,"
+<div class=""dm-tabs__rte"" style=""margin:0; padding:0; background:transparent; color:#2a211b; font-family:inherit;"">
+  <div style=""display:grid; gap:16px; margin:0; padding:0; background:transparent;"">
+    <div style=""padding:16px 18px; border-radius:16px; background:rgba(91,50,24,0.055); border:1px solid rgba(92,58,35,0.10);"">
+      <div style=""margin:0 0 6px; color:#5a3218; font-size:11px; line-height:1; font-weight:600; letter-spacing:0.16em; text-transform:uppercase;"">
+        Sculptural Curved Statement Design
+      </div>
+      <p style=""margin:0; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">
+        Add artistic movement to your home with a flowing curved bookcase designed to feel like functional furniture and modern wall art in one, creating a warm focal point for any room.
+      </p>
+    </div>
+    
+    <div style=""display:grid; grid-template-columns:34px 1fr; gap:14px; padding:0 0 16px; border-bottom:1px solid rgba(92,58,35,0.14); background:transparent;"">
+      <span style=""width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; background:rgba(91,50,24,0.09); color:#5a3218; font-size:11px; font-weight:600; letter-spacing:0.04em; line-height:1;"">01</span>
+      <div style=""margin:0; padding:0; background:transparent;"">
+        <h3 style=""margin:0 0 7px; padding:0; color:#1f1712; font-family:var(--font-heading-family, Georgia, serif); font-size:17px; line-height:1.35; font-weight:500;"">Premium Solid Wood Construction</h3>
+        <p style=""margin:0; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">Made with a solid wood design, smooth rounded edges, and rich grain texture, this bookcase brings a premium natural look while offering dependable everyday storage.</p>
+      </div>
+    </div>
+    
+    <div style=""display:grid; grid-template-columns:34px 1fr; gap:14px; padding:0 0 16px; border-bottom:1px solid rgba(92,58,35,0.14); background:transparent;"">
+      <span style=""width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; background:rgba(91,50,24,0.09); color:#5a3218; font-size:11px; font-weight:600; letter-spacing:0.04em; line-height:1;"">02</span>
+      <div style=""margin:0; padding:0; background:transparent;"">
+        <h3 style=""margin:0 0 7px; padding:0; color:#1f1712; font-family:var(--font-heading-family, Georgia, serif); font-size:17px; line-height:1.35; font-weight:500;"">Open Display Storage</h3>
+        <p style=""margin:0 0 10px; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">The multi-tier layout gives you spacious shelving for helping your room feel organized, curated, and visually balanced.</p>
+        <div style=""display:flex; flex-wrap:wrap; gap:7px; margin:0; padding:0;"">
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.06); border:1px solid rgba(92,58,35,0.10); color:rgba(42,33,27,0.78); font-size:12px; line-height:1;"">Books</span>
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.06); border:1px solid rgba(92,58,35,0.10); color:rgba(42,33,27,0.78); font-size:12px; line-height:1;"">Plants</span>
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.06); border:1px solid rgba(92,58,35,0.10); color:rgba(42,33,27,0.78); font-size:12px; line-height:1;"">Bowls &amp; Vases</span>
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.06); border:1px solid rgba(92,58,35,0.10); color:rgba(42,33,27,0.78); font-size:12px; line-height:1;"">Framed Art</span>
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.06); border:1px solid rgba(92,58,35,0.10); color:rgba(42,33,27,0.78); font-size:12px; line-height:1;"">Candles</span>
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.09); border:1px solid rgba(92,58,35,0.13); color:#5a3218; font-size:12px; line-height:1;"">Collectibles</span>
+        </div>
+      </div>
+    </div>
+    
+    <div style=""display:grid; grid-template-columns:34px 1fr; gap:14px; padding:0 0 16px; border-bottom:1px solid rgba(92,58,35,0.14); background:transparent;"">
+      <span style=""width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; background:rgba(91,50,24,0.09); color:#5a3218; font-size:11px; font-weight:600; letter-spacing:0.04em; line-height:1;"">03</span>
+      <div style=""margin:0; padding:0; background:transparent;"">
+        <h3 style=""margin:0 0 7px; padding:0; color:#1f1712; font-family:var(--font-heading-family, Georgia, serif); font-size:17px; line-height:1.35; font-weight:500;"">Perfect for Living Room Interiors</h3>
+        <p style=""margin:0; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">Ideal for modern living rooms, home offices, entryways, bedrooms, reading nooks, creative studios, or rustic-inspired spaces. The low wide shape works beautifully along a wall without making the room feel crowded.</p>
+      </div>
+    </div>
+    
+    <div style=""display:grid; grid-template-columns:34px 1fr; gap:14px; padding:0 0 16px; border-bottom:1px solid rgba(92,58,35,0.14); background:transparent;"">
+      <span style=""width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; background:rgba(91,50,24,0.09); color:#5a3218; font-size:11px; font-weight:600; letter-spacing:0.04em; line-height:1;"">04</span>
+      <div style=""margin:0; padding:0; background:transparent;"">
+        <h3 style=""margin:0 0 7px; padding:0; color:#1f1712; font-family:var(--font-heading-family, Georgia, serif); font-size:17px; line-height:1.35; font-weight:500;"">Multiple Size Options</h3>
+        <p style=""margin:0; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">Available in 51"", 55"", 59"", and 63"" widths, allowing you to choose the best fit for your wall space, display needs, and room layout.</p>
+      </div>
+    </div>
+
+    <div style=""display:grid; grid-template-columns:34px 1fr; gap:14px; padding:0 0 16px; border-bottom:1px solid rgba(92,58,35,0.14); background:transparent;"">
+      <span style=""width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; background:rgba(91,50,24,0.09); color:#5a3218; font-size:11px; font-weight:600; letter-spacing:0.04em; line-height:1;"">05</span>
+      <div style=""margin:0; padding:0; background:transparent;"">
+        <h3 style=""margin:0 0 7px; padding:0; color:#1f1712; font-family:var(--font-heading-family, Georgia, serif); font-size:17px; line-height:1.35; font-weight:500;"">Four Finish Choices</h3>
+        <p style=""margin:0 0 10px; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">Select from distinct finishes to easily coordinate with cozy rustic, minimalist, boho, farmhouse, or contemporary interiors.</p>
+        <div style=""display:flex; flex-wrap:wrap; gap:7px; margin:0; padding:0;"">
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.06); border:1px solid rgba(92,58,35,0.10); color:rgba(42,33,27,0.78); font-size:12px; line-height:1;"">Warm Wood</span>
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.06); border:1px solid rgba(92,58,35,0.10); color:rgba(42,33,27,0.78); font-size:12px; line-height:1;"">Dark Warm Wood</span>
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.06); border:1px solid rgba(92,58,35,0.10); color:rgba(42,33,27,0.78); font-size:12px; line-height:1;"">Cool Dark Wood</span>
+          <span style=""display:inline-flex; padding:6px 9px; border-radius:999px; background:rgba(91,50,24,0.09); border:1px solid rgba(92,58,35,0.13); color:#5a3218; font-size:12px; line-height:1;"">Natural Finish</span>
+        </div>
+      </div>
+    </div>
+    
+    <div style=""display:grid; grid-template-columns:34px 1fr; gap:14px; padding:0 0 16px; border-bottom:1px solid rgba(92,58,35,0.14); background:transparent;"">
+      <span style=""width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; background:rgba(91,50,24,0.09); color:#5a3218; font-size:11px; font-weight:600; letter-spacing:0.04em; line-height:1;"">06</span>
+      <div style=""margin:0; padding:0; background:transparent;"">
+        <h3 style=""margin:0 0 7px; padding:0; color:#1f1712; font-family:var(--font-heading-family, Georgia, serif); font-size:17px; line-height:1.35; font-weight:500;"">Unique Home Decor Gift</h3>
+        <p style=""margin:0; padding:0; color:rgba(42,33,27,0.76); font-size:14px; line-height:1.7; font-weight:400;"">A thoughtful housewarming, holiday, birthday, or new home gift for book lovers, design enthusiasts, plant collectors, and anyone who appreciates sculptural wood furniture.</p>
+      </div>
+    </div>
+    
+    <div style=""margin:2px 0 0; padding:13px 15px; border-radius:14px; background:rgba(91,50,24,0.06); color:rgba(42,33,27,0.72); font-size:13px; line-height:1.6; border:1px solid rgba(92,58,35,0.08);"">
+      Books, plants, pottery, lanterns, framed photos, baskets, and other decorative objects shown in product photos are for presentation only unless explicitly included.
+    </div>
+  </div>
+</div>
+",Wrydeco,Furniture > Shelving > Bookcases & Standing Shelves,standing-bookshelf,"rich_desc, source_amazon, vnote",true,Size,"45""W x 45""H x 8""D",,Wood Finish,Natural,,,,,,0.0,,0,continue,manual,2343.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331501625-gallery-001-logo-861f046d561e_e1722e9c-4256-470c-ba18-f73fa83ab359.jpg?v=1786639638,1,"",false,Modern Sculptural Curved Solid Wood Bookcase Display,"Elevate your living room with this sculptural curved solid wood bookcase. Featuring open display storage, this modern shelf adds artistic and organic style.",https://www.amazon.com/dp/B0H6F9YM5J?lv=shuf&channelId=500&plpRedirect=mhFallback,son-tran,,wood,,"<div class=""description-root""><img alt=""ư"" src=""https://via.placeholder.com/800"" class=""a-spacing-base"" data-src=""https://vnote.io.vn/uploads/images/5f5ad9554c3e4bdb8aa9c7ff5caf8708--Sculptural-Curved-Bookcase-Solid-Wood-Modern-Display-Shelf-with-Open-Storage-for-Living-Room-Interior-Office-Decor-Option-1-rich-001.jpg""> <img alt=""s"" src=""https://via.placeholder.com/800"" class=""a-spacing-base"" data-src=""https://vnote.io.vn/uploads/images/b71134ce0420401baf955f462f2eb508--Sculptural-Curved-Bookcase-Solid-Wood-Modern-Display-Shelf-with-Open-Storage-for-Living-Room-Interior-Office-Decor-Option-1-rich-002.jpg""> <img alt=""s"" src=""https://via.placeholder.com/800"" class=""a-spacing-base"" data-src=""https://vnote.io.vn/uploads/images/008ebe204d994315b6081911045465a4--Sculptural-Curved-Bookcase-Solid-Wood-Modern-Display-Shelf-with-Open-Storage-for-Living-Room-Interior-Office-Decor-Option-1-rich-003.jpg""> <img alt=""s"" src=""https://via.placeholder.com/800"" class=""a-spacing-base"" data-src=""https://vnote.io.vn/uploads/images/644d07d343904afaae8bf0ce36cb91f9--Sculptural-Curved-Bookcase-Solid-Wood-Modern-Display-Shelf-with-Open-Storage-for-Living-Room-Interior-Office-Decor-Option-1-rich-004.jpg""> <img alt=""x"" src=""https://via.placeholder.com/800"" class=""a-spacing-base"" data-src=""https://vnote.io.vn/uploads/images/a8513c89e38d418dac4a42a835126a85--Sculptural-Curved-Bookcase-Solid-Wood-Modern-Display-Shelf-with-Open-Storage-for-Living-Room-Interior-Office-Decor-Option-1-rich-005.jpg""></div>",Modern Sculptural Curved Solid Wood Bookcase Display Shelf,,wood,,,,,,,,,,,kg,,,active
+modern-sculptural-curved-solid-wood-bookcase-shelf,,,,,,,,,"59""W x 50""H x 9""D",,,Natural,,,,,,0.0,,0,continue,manual,2864.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331501625-gallery-002-logo-f574c6953ffa_10c8b578-f23b-4e13-89f1-4baedfbf4f02.jpg?v=1786639638,2,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+modern-sculptural-curved-solid-wood-bookcase-shelf,,,,,,,,,"75""W x 65""H x 10""D",,,Natural,,,,,,0.0,,0,continue,manual,3385.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331501625-gallery-003-logo-3016a58277ce_d38b59f3-0db1-404d-9d83-56ccff4c1d90.jpg?v=1786639638,3,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+modern-sculptural-curved-solid-wood-bookcase-shelf,,,,,,,,,"89""W x 80""H x 10-12""D",,,Natural,,,,,,0.0,,0,continue,manual,3906.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331501625-gallery-004-logo-2e49a8989da1_0caa393e-07cb-4d5d-8d9e-5a3360b7814b.jpg?v=1786639638,4,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+modern-sculptural-curved-solid-wood-bookcase-shelf,,,,,,,,,"45""W x 45""H x 8""D",,,Light Oak,,,,,,0.0,,0,continue,manual,2343.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331501625-gallery-005-logo-1be7922dada8_981b6209-f8a7-49de-bbd3-ecadc281c77e.jpg?v=1786639638,5,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+modern-sculptural-curved-solid-wood-bookcase-shelf,,,,,,,,,"45""W x 45""H x 8""D",,,Walnut,,,,,,0.0,,0,continue,manual,2343.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331501625-gallery-006-logo-03628bc8591a_b812b403-7420-427e-b057-a2fddb7d0e64.jpg?v=1786639638,6,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+modern-sculptural-curved-solid-wood-bookcase-shelf,,,,,,,,,"45""W x 45""H x 8""D",,,Dark Walnut,,,,,,0.0,,0,continue,manual,2343.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331501625-gallery-007-logo-69137410e2b5_f6b09881-9432-43ac-8f28-ff3eed7ab711.jpg?v=1786639638,7,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+modern-sculptural-curved-solid-wood-bookcase-shelf,,,,,,,,,"45""W x 45""H x 8""D",,,Custom,,,,,,0.0,,0,continue,manual,2343.00,,true,true,,,,,,https://cdn.shopify.com/s/files/1/0805/4410/4505/files/8376331501625-gallery-008-logo-5806feffaaf7_2923b81a-d456-4206-b02e-43bdca6ebf16.jpg?v=1786639638,8,"",,,,,,,,,,,,,,,,,,,,,,,kg,,,
+modern-sculptural-curved-solid-wood-bookcase-shelf,,,,,,,,,"59""W x 50""H x 9""D",,,Light Oak,,,,,,0.0,,0,continue,manual,2864.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+modern-sculptural-curved-solid-wood-bookcase-shelf,,,,,,,,,"59""W x 50""H x 9""D",,,Walnut,,,,,,0.0,,0,continue,manual,2864.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+modern-sculptural-curved-solid-wood-bookcase-shelf,,,,,,,,,"59""W x 50""H x 9""D",,,Dark Walnut,,,,,,0.0,,0,continue,manual,2864.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+modern-sculptural-curved-solid-wood-bookcase-shelf,,,,,,,,,"59""W x 50""H x 9""D",,,Custom,,,,,,0.0,,0,continue,manual,2864.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+modern-sculptural-curved-solid-wood-bookcase-shelf,,,,,,,,,"75""W x 65""H x 10""D",,,Light Oak,,,,,,0.0,,0,continue,manual,3385.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+modern-sculptural-curved-solid-wood-bookcase-shelf,,,,,,,,,"75""W x 65""H x 10""D",,,Walnut,,,,,,0.0,,0,continue,manual,3385.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+modern-sculptural-curved-solid-wood-bookcase-shelf,,,,,,,,,"75""W x 65""H x 10""D",,,Dark Walnut,,,,,,0.0,,0,continue,manual,3385.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+modern-sculptural-curved-solid-wood-bookcase-shelf,,,,,,,,,"75""W x 65""H x 10""D",,,Custom,,,,,,0.0,,0,continue,manual,3385.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+modern-sculptural-curved-solid-wood-bookcase-shelf,,,,,,,,,"89""W x 80""H x 10-12""D",,,Light Oak,,,,,,0.0,,0,continue,manual,3906.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+modern-sculptural-curved-solid-wood-bookcase-shelf,,,,,,,,,"89""W x 80""H x 10-12""D",,,Walnut,,,,,,0.0,,0,continue,manual,3906.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+modern-sculptural-curved-solid-wood-bookcase-shelf,,,,,,,,,"89""W x 80""H x 10-12""D",,,Dark Walnut,,,,,,0.0,,0,continue,manual,3906.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,
+modern-sculptural-curved-solid-wood-bookcase-shelf,,,,,,,,,"89""W x 80""H x 10-12""D",,,Custom,,,,,,0.0,,0,continue,manual,3906.00,,true,true,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kg,,,

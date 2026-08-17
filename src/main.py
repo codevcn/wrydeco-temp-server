@@ -68,7 +68,7 @@ ALLOWED_VIDEO_CONTENT_TYPES = {
     "video/webm": ".webm",
     "video/quicktime": ".mov",
 }
-MAX_VIDEO_UPLOAD_BYTES = 100 * 1024 * 1024  # 100MB mỗi video
+MAX_VIDEO_UPLOAD_BYTES = float('inf')  # Không giới hạn dung lượng
 VIDEO_UPLOAD_DIR = UPLOAD_DIR / "videos"
 
 # --- Consultation form contract (doc/consultation-form.md) ---------------
@@ -779,7 +779,7 @@ async def upload_video(
     if len(content) > MAX_VIDEO_UPLOAD_BYTES:
         raise HTTPException(
             status_code=413,
-            detail="Video exceeds 100MB limit.",
+            detail="Video exceeds limit.",
         )
 
     VIDEO_UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
@@ -801,6 +801,29 @@ async def upload_video(
         content={
             "video_url": video_url,
         },
+    )
+
+
+@app.delete(
+    "/api/delete-video/{filename}",
+    tags=["Uploads"],
+    summary="Xóa video đã upload",
+    description="Xóa video bằng filename"
+)
+async def delete_video(filename: str) -> JSONResponse:
+    file_path = VIDEO_UPLOAD_DIR / filename
+    try:
+        file_path.relative_to(VIDEO_UPLOAD_DIR)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid file path.")
+        
+    if not file_path.exists() or not file_path.is_file():
+        raise HTTPException(status_code=404, detail="Video not found.")
+        
+    file_path.unlink()
+    return JSONResponse(
+        status_code=200,
+        content={"success": True, "message": "Video deleted successfully."},
     )
 
 
